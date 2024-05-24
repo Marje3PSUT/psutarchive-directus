@@ -1,0 +1,1657 @@
+[
+  {
+    "action": "read",
+    "collection": "about_page",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "announcement",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "category",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "course",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "course_category",
+    "fields": [
+      "category_id",
+      "id",
+      "course_id"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {}
+  },
+  {
+    "action": "create",
+    "collection": "directus_files",
+    "fields": [
+      "id",
+      "associated_resources",
+      "title",
+      "description",
+      "location",
+      "storage",
+      "storage_divider",
+      "filename_disk",
+      "filename_download",
+      "metadata",
+      "type",
+      "filesize",
+      "modified_by",
+      "modified_on",
+      "uploaded_by",
+      "uploaded_on",
+      "width",
+      "height",
+      "charset",
+      "duration",
+      "$thumbnail"
+    ],
+    "permissions": {},
+    "presets": {
+      "folder": "24bd313a-6aba-4b24-a7f3-c67e4ccc0085"
+    },
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": null
+  },
+  {
+    "action": "delete",
+    "collection": "directus_files",
+    "fields": null,
+    "permissions": {
+      "_and": [
+        {
+          "uploaded_by": {
+            "_eq": "$CURRENT_USER"
+          }
+        },
+        {
+          "_or": [
+            {
+              "associated_resources": {
+                "_null": true
+              }
+            },
+            {
+              "associated_resources": {
+                "resource_id": {
+                  "status": {
+                    "_eq": "unverified"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": null
+  },
+  {
+    "action": "read",
+    "collection": "directus_files",
+    "fields": [
+      "id",
+      "title",
+      "description",
+      "storage",
+      "filename_disk",
+      "filename_download",
+      "filesize",
+      "storage_divider",
+      "metadata",
+      "type",
+      "modified_by",
+      "modified_on",
+      "uploaded_by",
+      "uploaded_on",
+      "width",
+      "charset",
+      "$thumbnail",
+      "duration",
+      "height",
+      "embed",
+      "focal_point_y",
+      "focal_point_divider",
+      "location",
+      "focal_point_x",
+      "tags",
+      "associated_resources",
+      "folder"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "_or": [
+            {
+              "uploaded_by": {
+                "_eq": "$CURRENT_USER"
+              }
+            },
+            {
+              "associated_resources": {
+                "resource_id": {
+                  "status": {
+                    "_eq": "verified"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {}
+  },
+  {
+    "action": "update",
+    "collection": "directus_files",
+    "fields": [
+      "id",
+      "associated_resources",
+      "title",
+      "description",
+      "location",
+      "storage",
+      "storage_divider",
+      "filename_disk",
+      "filename_download",
+      "filesize",
+      "metadata",
+      "type",
+      "modified_on",
+      "modified_by",
+      "uploaded_on",
+      "uploaded_by",
+      "width",
+      "charset",
+      "duration",
+      "height",
+      "$thumbnail"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "_and": [
+            {
+              "associated_resources": {
+                "resource_id": {
+                  "user_created": {
+                    "_eq": "$CURRENT_USER"
+                  }
+                }
+              }
+            },
+            {
+              "associated_resources": {
+                "resource_id": {
+                  "status": {
+                    "_eq": "unverified"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "directus_panels",
+    "fields": null,
+    "permissions": null,
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": null
+  },
+  {
+    "action": "create",
+    "collection": "directus_presets",
+    "fields": [
+      "refresh_interval",
+      "collection",
+      "layout",
+      "search",
+      "id",
+      "user",
+      "role",
+      "layout_options",
+      "filter",
+      "layout_query"
+    ],
+    "permissions": null,
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": null
+  },
+  {
+    "action": "update",
+    "collection": "directus_presets",
+    "fields": [
+      "filter",
+      "layout_options",
+      "user",
+      "id",
+      "role",
+      "layout_query",
+      "collection",
+      "refresh_interval",
+      "layout",
+      "search"
+    ],
+    "permissions": null,
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": null
+  },
+  {
+    "action": "read",
+    "collection": "directus_users",
+    "fields": [
+      "first_name",
+      "last_name",
+      "appearance",
+      "language",
+      "credits_visible"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "_or": [
+            {
+              "id": {
+                "_eq": "$CURRENT_USER"
+              }
+            },
+            {
+              "credits_visible": {
+                "_eq": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": null
+  },
+  {
+    "action": "update",
+    "collection": "directus_users",
+    "fields": [
+      "credits_visible",
+      "language",
+      "appearance",
+      "first_name",
+      "last_name",
+      "theme_light",
+      "theme_dark"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "id": {
+            "_eq": "$CURRENT_USER"
+          }
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": null
+  },
+  {
+    "action": "create",
+    "collection": "exam_data",
+    "fields": [
+      "type",
+      "solved"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {}
+  },
+  {
+    "action": "delete",
+    "collection": "exam_data",
+    "fields": null,
+    "permissions": {
+      "_and": [
+        {
+          "_and": [
+            {
+              "related_resource": {
+                "status": {
+                  "_eq": "unverified"
+                }
+              }
+            },
+            {
+              "related_resource": {
+                "user_created": {
+                  "_eq": "$CURRENT_USER"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": null
+  },
+  {
+    "action": "read",
+    "collection": "exam_data",
+    "fields": [
+      "id",
+      "type",
+      "solved",
+      "related_resource"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "_or": [
+            {
+              "related_resource": {
+                "status": {
+                  "_eq": "verified"
+                }
+              }
+            },
+            {
+              "related_resource": {
+                "user_created": {
+                  "_eq": "$CURRENT_USER"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {}
+  },
+  {
+    "action": "update",
+    "collection": "exam_data",
+    "fields": [
+      "type",
+      "solved",
+      "related_resource"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "_and": [
+            {
+              "related_resource": {
+                "status": {
+                  "_eq": "unverified"
+                }
+              }
+            },
+            {
+              "related_resource": {
+                "user_created": {
+                  "_eq": "$CURRENT_USER"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": null
+  },
+  {
+    "action": "create",
+    "collection": "note_data",
+    "fields": [
+      "type",
+      "title",
+      "original_author"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {}
+  },
+  {
+    "action": "delete",
+    "collection": "note_data",
+    "fields": null,
+    "permissions": {
+      "_and": [
+        {
+          "_and": [
+            {
+              "related_resource": {
+                "status": {
+                  "_eq": "unverified"
+                }
+              }
+            },
+            {
+              "related_resource": {
+                "user_created": {
+                  "_eq": "$CURRENT_USER"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": null
+  },
+  {
+    "action": "read",
+    "collection": "note_data",
+    "fields": [
+      "*"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "_or": [
+            {
+              "related_resource": {
+                "status": {
+                  "_eq": "verified"
+                }
+              }
+            },
+            {
+              "related_resource": {
+                "user_created": {
+                  "_eq": "$CURRENT_USER"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {}
+  },
+  {
+    "action": "update",
+    "collection": "note_data",
+    "fields": [
+      "type",
+      "title",
+      "original_author",
+      "related_resource"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "_and": [
+            {
+              "related_resource": {
+                "status": {
+                  "_eq": "unverified"
+                }
+              }
+            },
+            {
+              "related_resource": {
+                "user_created": {
+                  "_eq": "$CURRENT_USER"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": null
+  },
+  {
+    "action": "create",
+    "collection": "resource",
+    "fields": [
+      "course",
+      "type",
+      "note_data",
+      "exam_data",
+      "year",
+      "semester",
+      "original_author",
+      "files"
+    ],
+    "permissions": {},
+    "presets": {
+      "status": "unverified"
+    },
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {
+      "_and": [
+        {
+          "_or": [
+            {
+              "_and": [
+                {
+                  "type": {
+                    "_eq": "exam"
+                  }
+                },
+                {
+                  "note_data": {
+                    "_null": true
+                  }
+                },
+                {
+                  "exam_data": {
+                    "_nnull": true
+                  }
+                }
+              ]
+            },
+            {
+              "_and": [
+                {
+                  "type": {
+                    "_eq": "note"
+                  }
+                },
+                {
+                  "note_data": {
+                    "_nnull": true
+                  }
+                },
+                {
+                  "exam_data": {
+                    "_null": true
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "action": "delete",
+    "collection": "resource",
+    "fields": [
+      "*"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "_and": [
+            {
+              "status": {
+                "_eq": "unverified"
+              }
+            },
+            {
+              "user_created": {
+                "_eq": "$CURRENT_USER"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "resource",
+    "fields": [
+      "*"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "_or": [
+            {
+              "status": {
+                "_eq": "verified"
+              }
+            },
+            {
+              "user_created": {
+                "_eq": "$CURRENT_USER"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {}
+  },
+  {
+    "action": "update",
+    "collection": "resource",
+    "fields": [
+      "needs_review",
+      "course",
+      "type",
+      "note_data",
+      "exam_data",
+      "year",
+      "semester",
+      "original_author",
+      "files"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "_and": [
+            {
+              "status": {
+                "_eq": "unverified"
+              }
+            },
+            {
+              "user_created": {
+                "_eq": "$CURRENT_USER"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {
+      "_and": [
+        {
+          "_or": [
+            {
+              "_and": [
+                {
+                  "type": {
+                    "_eq": "note"
+                  }
+                },
+                {
+                  "exam_data": {
+                    "_null": true
+                  }
+                },
+                {
+                  "note_data": {
+                    "_nnull": true
+                  }
+                }
+              ]
+            },
+            {
+              "_and": [
+                {
+                  "type": {
+                    "_eq": "exam"
+                  }
+                },
+                {
+                  "exam_data": {
+                    "_nnull": true
+                  }
+                },
+                {
+                  "note_data": {
+                    "_null": true
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "action": "create",
+    "collection": "resource_files",
+    "fields": [
+      "resource_id",
+      "directus_files_id",
+      "sort"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {}
+  },
+  {
+    "action": "delete",
+    "collection": "resource_files",
+    "fields": null,
+    "permissions": {
+      "_and": [
+        {
+          "_and": [
+            {
+              "resource_id": {
+                "status": {
+                  "_eq": "unverified"
+                }
+              }
+            },
+            {
+              "resource_id": {
+                "user_created": {
+                  "_eq": "$CURRENT_USER"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": null
+  },
+  {
+    "action": "read",
+    "collection": "resource_files",
+    "fields": [
+      "directus_files_id",
+      "sort",
+      "resource_id",
+      "id"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "_or": [
+            {
+              "resource_id": {
+                "status": {
+                  "_eq": "verified"
+                }
+              }
+            },
+            {
+              "resource_id": {
+                "user_created": {
+                  "_eq": "$CURRENT_USER"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": {}
+  },
+  {
+    "action": "update",
+    "collection": "resource_files",
+    "fields": [
+      "directus_files_id",
+      "sort",
+      "id",
+      "resource_id"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "_and": [
+            {
+              "resource_id": {
+                "status": {
+                  "_eq": "unverified"
+                }
+              }
+            },
+            {
+              "resource_id": {
+                "user_created": {
+                  "_eq": "$CURRENT_USER"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "46ee07b4-b91a-40cd-be4b-94dcd16af0bd",
+    "validation": null
+  },
+  {
+    "action": "read",
+    "collection": "about_page",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "announcement",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "category",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "create",
+    "collection": "course",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "delete",
+    "collection": "course",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "course",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "update",
+    "collection": "course",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "create",
+    "collection": "course_category",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "delete",
+    "collection": "course_category",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "course_category",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "update",
+    "collection": "course_category",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "directus_activity",
+    "fields": null,
+    "permissions": {
+      "_and": [
+        {
+          "user": {
+            "role": {
+              "name": {
+                "_in": [
+                  "Moderator",
+                  "Contributor"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": null
+  },
+  {
+    "action": "create",
+    "collection": "directus_files",
+    "fields": [
+      "id",
+      "associated_resources",
+      "title",
+      "description",
+      "tags",
+      "location",
+      "storage",
+      "storage_divider",
+      "filename_disk",
+      "filename_download",
+      "metadata",
+      "type",
+      "filesize",
+      "modified_by",
+      "modified_on",
+      "embed",
+      "uploaded_by",
+      "uploaded_on",
+      "width",
+      "height",
+      "charset",
+      "duration",
+      "$thumbnail"
+    ],
+    "permissions": {},
+    "presets": {
+      "folder": "24bd313a-6aba-4b24-a7f3-c67e4ccc0085"
+    },
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "delete",
+    "collection": "directus_files",
+    "fields": [
+      "*"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "associated_resources": {
+            "_nnull": true
+          }
+        }
+      ]
+    },
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "directus_files",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": null
+  },
+  {
+    "action": "update",
+    "collection": "directus_files",
+    "fields": [
+      "id",
+      "associated_resources",
+      "title",
+      "description",
+      "tags",
+      "location",
+      "storage",
+      "storage_divider",
+      "filename_disk",
+      "filename_download",
+      "metadata",
+      "type",
+      "filesize",
+      "modified_by",
+      "modified_on",
+      "embed",
+      "uploaded_by",
+      "uploaded_on",
+      "width",
+      "height",
+      "charset",
+      "duration",
+      "$thumbnail"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "directus_flows",
+    "fields": [
+      "id",
+      "status",
+      "name",
+      "icon",
+      "color",
+      "options",
+      "trigger"
+    ],
+    "permissions": {
+      "trigger": {
+        "_eq": "manual"
+      }
+    },
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": null
+  },
+  {
+    "action": "read",
+    "collection": "directus_folders",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": null
+  },
+  {
+    "action": "read",
+    "collection": "directus_roles",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": null
+  },
+  {
+    "action": "read",
+    "collection": "directus_shares",
+    "fields": [
+      "*"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "user_created": {
+            "_eq": "$CURRENT_USER"
+          }
+        }
+      ]
+    },
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "directus_users",
+    "fields": [
+      "first_name",
+      "credits_visible",
+      "last_name",
+      "language",
+      "appearance",
+      "status",
+      "id"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "id": {
+            "_nnull": true
+          }
+        }
+      ]
+    },
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": null
+  },
+  {
+    "action": "update",
+    "collection": "directus_users",
+    "fields": [
+      "first_name",
+      "last_name",
+      "language",
+      "appearance",
+      "status",
+      "credits_visible",
+      "theme_light",
+      "theme_dark"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "_or": [
+            {
+              "role": {
+                "name": {
+                  "_eq": "Contributor"
+                }
+              }
+            },
+            {
+              "id": {
+                "_eq": "$CURRENT_USER"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": null
+  },
+  {
+    "action": "create",
+    "collection": "exam_data",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "delete",
+    "collection": "exam_data",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "exam_data",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "update",
+    "collection": "exam_data",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "create",
+    "collection": "note_data",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "delete",
+    "collection": "note_data",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "note_data",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "update",
+    "collection": "note_data",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "delete",
+    "collection": "report",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "report",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "create",
+    "collection": "resource",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "delete",
+    "collection": "resource",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "resource",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "update",
+    "collection": "resource",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "create",
+    "collection": "resource_files",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "delete",
+    "collection": "resource_files",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "resource_files",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "update",
+    "collection": "resource_files",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": "c26ce4ed-9eea-4b1a-9f74-6496c3f105e4",
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "about_page",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": null,
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "announcement",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": null,
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "category",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": null,
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "course",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": null,
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "course_category",
+    "fields": [
+      "category_id",
+      "course_id",
+      "id"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": null,
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "directus_files",
+    "fields": [
+      "id",
+      "filename_disk",
+      "filesize",
+      "filename_download"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "associated_resources": {
+            "resource_id": {
+              "status": {
+                "_eq": "verified"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "presets": null,
+    "role": null,
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "directus_users",
+    "fields": [
+      "first_name",
+      "last_name"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "credits_visible": {
+            "_eq": true
+          }
+        }
+      ]
+    },
+    "presets": null,
+    "role": null,
+    "validation": null
+  },
+  {
+    "action": "read",
+    "collection": "exam_data",
+    "fields": [
+      "type",
+      "solved"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "related_resource": {
+            "status": {
+              "_eq": "verified"
+            }
+          }
+        }
+      ]
+    },
+    "presets": null,
+    "role": null,
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "note_data",
+    "fields": [
+      "type",
+      "title"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "related_resource": {
+            "status": {
+              "_eq": "verified"
+            }
+          }
+        }
+      ]
+    },
+    "presets": null,
+    "role": null,
+    "validation": {}
+  },
+  {
+    "action": "create",
+    "collection": "report",
+    "fields": [
+      "*"
+    ],
+    "permissions": {},
+    "presets": null,
+    "role": null,
+    "validation": {}
+  },
+  {
+    "action": "read",
+    "collection": "resource",
+    "fields": [
+      "id",
+      "course",
+      "exam_data",
+      "year",
+      "type",
+      "note_data",
+      "semester",
+      "files",
+      "original_author",
+      "date_updated",
+      "user_created"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "verified"
+          }
+        }
+      ]
+    },
+    "presets": null,
+    "role": null,
+    "validation": null
+  },
+  {
+    "action": "read",
+    "collection": "resource_files",
+    "fields": [
+      "directus_files_id",
+      "sort"
+    ],
+    "permissions": {
+      "_and": [
+        {
+          "resource_id": {
+            "status": {
+              "_eq": "verified"
+            }
+          }
+        }
+      ]
+    },
+    "presets": null,
+    "role": null,
+    "validation": {}
+  }
+]

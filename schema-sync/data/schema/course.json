@@ -1,0 +1,502 @@
+{
+  "collection": "course",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": null,
+    "archive_value": null,
+    "collapse": "open",
+    "collection": "course",
+    "color": null,
+    "display_template": "{{name}}",
+    "group": null,
+    "hidden": false,
+    "icon": "menu_book",
+    "item_duplication_fields": null,
+    "note": null,
+    "preview_url": null,
+    "singleton": false,
+    "sort": 2,
+    "sort_field": null,
+    "translations": [
+      {
+        "language": "en-US",
+        "translation": "Course",
+        "singular": "course",
+        "plural": "courses"
+      },
+      {
+        "language": "ar-SA",
+        "translation": "مادة",
+        "singular": "مادة",
+        "plural": "مواد"
+      }
+    ],
+    "unarchive_value": null,
+    "versioning": false
+  },
+  "schema": {
+    "name": "course"
+  },
+  "fields": [
+    {
+      "field": "additional_notes",
+      "type": "string",
+      "meta": {
+        "collection": "course",
+        "conditions": null,
+        "display": "formatted-value",
+        "display_options": null,
+        "field": "additional_notes",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": null,
+        "options": {
+          "clear": true,
+          "trim": true
+        },
+        "readonly": false,
+        "required": false,
+        "sort": 9,
+        "special": null,
+        "translations": [
+          {
+            "language": "en-US",
+            "translation": "Additional Notes"
+          },
+          {
+            "language": "ar-SA",
+            "translation": "ملاحظات إضافية"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "additional_notes",
+        "table": "course",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "field": "alt_names",
+      "type": "csv",
+      "meta": {
+        "collection": "course",
+        "conditions": null,
+        "display": "labels",
+        "display_options": null,
+        "field": "alt_names",
+        "group": null,
+        "hidden": false,
+        "interface": "tags",
+        "note": "$t:alt_names_hint",
+        "options": null,
+        "readonly": false,
+        "required": false,
+        "sort": 8,
+        "special": [
+          "cast-csv"
+        ],
+        "translations": [
+          {
+            "language": "en-US",
+            "translation": "Alternative names"
+          },
+          {
+            "language": "ar-SA",
+            "translation": "أسماء اخرى"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "alt_names",
+        "table": "course",
+        "data_type": "text",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "field": "category",
+      "type": "alias",
+      "meta": {
+        "collection": "course",
+        "conditions": null,
+        "display": "related-values",
+        "display_options": {
+          "template": "{{category_id.name_en}}"
+        },
+        "field": "category",
+        "group": null,
+        "hidden": false,
+        "interface": "list-m2m",
+        "note": null,
+        "options": {
+          "enableCreate": false,
+          "template": "{{category_id.name_en}}"
+        },
+        "readonly": false,
+        "required": false,
+        "sort": 3,
+        "special": [
+          "m2m"
+        ],
+        "translations": [
+          {
+            "language": "ar-SA",
+            "translation": "القسم"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      }
+    },
+    {
+      "field": "course_id",
+      "type": "string",
+      "meta": {
+        "collection": "course",
+        "conditions": null,
+        "display": "formatted-value",
+        "display_options": null,
+        "field": "course_id",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": null,
+        "options": null,
+        "readonly": false,
+        "required": true,
+        "sort": 2,
+        "special": null,
+        "translations": [
+          {
+            "language": "en-US",
+            "translation": "Course ID"
+          },
+          {
+            "language": "ar-SA",
+            "translation": "رقم المادة"
+          }
+        ],
+        "validation": {
+          "_and": [
+            {
+              "course_id": {
+                "_regex": "^[0-9]{5}$"
+              }
+            }
+          ]
+        },
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "course_id",
+        "table": "course",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "field": "id",
+      "type": "integer",
+      "meta": {
+        "collection": "course",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "id",
+        "group": null,
+        "hidden": true,
+        "interface": "input",
+        "note": null,
+        "options": null,
+        "readonly": true,
+        "required": false,
+        "sort": 1,
+        "special": null,
+        "translations": null,
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "course",
+        "data_type": "integer",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_nullable": false,
+        "is_unique": true,
+        "is_primary_key": true,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": true,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "field": "links",
+      "type": "json",
+      "meta": {
+        "collection": "course",
+        "conditions": null,
+        "display": "formatted-json-value",
+        "display_options": {
+          "format": "{{ title }} - {{ url }}"
+        },
+        "field": "links",
+        "group": null,
+        "hidden": false,
+        "interface": "list",
+        "note": null,
+        "options": {
+          "fields": [
+            {
+              "field": "title",
+              "name": "title",
+              "type": "string",
+              "meta": {
+                "field": "title",
+                "width": "half",
+                "type": "string",
+                "required": false,
+                "interface": "input",
+                "options": {
+                  "trim": true
+                },
+                "display": "formatted-value"
+              }
+            },
+            {
+              "field": "url",
+              "name": "url",
+              "type": "string",
+              "meta": {
+                "field": "url",
+                "width": "full",
+                "type": "string",
+                "interface": "input",
+                "options": {
+                  "trim": true
+                },
+                "required": true
+              }
+            }
+          ],
+          "template": "{{ title }} - {{ url }}"
+        },
+        "readonly": false,
+        "required": false,
+        "sort": 7,
+        "special": [
+          "cast-json"
+        ],
+        "translations": [
+          {
+            "language": "ar-SA",
+            "translation": "الروابط"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "links",
+        "table": "course",
+        "data_type": "json",
+        "default_value": null,
+        "max_length": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "field": "name_ar",
+      "type": "string",
+      "meta": {
+        "collection": "course",
+        "conditions": null,
+        "display": "formatted-value",
+        "display_options": null,
+        "field": "name_ar",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": null,
+        "options": {
+          "trim": true
+        },
+        "readonly": false,
+        "required": true,
+        "sort": 5,
+        "special": null,
+        "translations": [
+          {
+            "language": "en-US",
+            "translation": "Name in Arabic"
+          },
+          {
+            "language": "ar-SA",
+            "translation": "الأسم بالعربية"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "name_ar",
+        "table": "course",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "field": "name_en",
+      "type": "string",
+      "meta": {
+        "collection": "course",
+        "conditions": null,
+        "display": "formatted-value",
+        "display_options": null,
+        "field": "name_en",
+        "group": null,
+        "hidden": false,
+        "interface": "input",
+        "note": null,
+        "options": {
+          "trim": true
+        },
+        "readonly": false,
+        "required": true,
+        "sort": 6,
+        "special": null,
+        "translations": [
+          {
+            "language": "en-US",
+            "translation": "Name in English"
+          },
+          {
+            "language": "ar-SA",
+            "translation": "الأسم باالإنجليزية"
+          }
+        ],
+        "validation": null,
+        "validation_message": null,
+        "width": "half"
+      },
+      "schema": {
+        "name": "name_en",
+        "table": "course",
+        "data_type": "character varying",
+        "default_value": null,
+        "max_length": 255,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_nullable": true,
+        "is_unique": false,
+        "is_primary_key": false,
+        "is_generated": false,
+        "generation_expression": null,
+        "has_auto_increment": false,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      }
+    },
+    {
+      "field": "resource",
+      "type": "alias",
+      "meta": {
+        "collection": "course",
+        "conditions": null,
+        "display": null,
+        "display_options": null,
+        "field": "resource",
+        "group": null,
+        "hidden": true,
+        "interface": "list-o2m",
+        "note": null,
+        "options": {
+          "enableCreate": false,
+          "enableSelect": false
+        },
+        "readonly": true,
+        "required": false,
+        "sort": 10,
+        "special": [
+          "o2m"
+        ],
+        "translations": null,
+        "validation": null,
+        "validation_message": null,
+        "width": "full"
+      }
+    }
+  ],
+  "relations": []
+}

@@ -1,0 +1,367 @@
+[
+  {
+    "key": "alt_names_hint",
+    "language": "ar-SA",
+    "value": "ضع فقط الأسماء التي لا يمكننا استخلاصها من اسم المادة. مثال \"Object Oriented Programming, OOP ✅, Object ❌\" "
+  },
+  {
+    "key": "alt_names_hint",
+    "language": "en-US",
+    "value": "Only include names that we can't derive from the name of the course. Ex: Object Oriented Programming, OOP ✅, Object ❌ "
+  },
+  {
+    "key": "assignment",
+    "language": "ar-SA",
+    "value": "واجب"
+  },
+  {
+    "key": "assignment",
+    "language": "en-US",
+    "value": "Assignment"
+  },
+  {
+    "key": "author_note",
+    "language": "ar-SA",
+    "value": "ختياري. الاسم الكامل للمؤلف الأصلي للملفات المرتبطة بالورقة بالإنجليزية"
+  },
+  {
+    "key": "author_note",
+    "language": "en-US",
+    "value": "Optional. The Full name of the original author of the files associated with the resource in English."
+  },
+  {
+    "key": "credits_notice",
+    "language": "ar-SA",
+    "value": "إذا قمت بتفعيل هذا الخيار، سيظهر اسمك و اسم عيلتك تحت كل ورقة ذات نوع \"ملاحظة\" التي قمت بتحميلها إلى PSUT Archive.\r\n\r\nسيظهر اسمك وبريدك الإلكتروني أيضًا للمستخدمين الآخرين على هذا موقع. "
+  },
+  {
+    "key": "credits_notice",
+    "language": "en-US",
+    "value": "If you enable this option, your first and last name will appear under every resource of type \"Note\" that you've uploaded to the archive.\r\n\r\nYour name and email will also show up for other users on the editor website."
+  },
+  {
+    "key": "delete_assoc",
+    "language": "ar-SA",
+    "value": "امسح البيانات المرتبطة قبل تغيير نوع الورقة"
+  },
+  {
+    "key": "delete_assoc",
+    "language": "en-US",
+    "value": "Deselect the associated data before changing types"
+  },
+  {
+    "key": "exam",
+    "language": "ar-SA",
+    "value": "اختبار"
+  },
+  {
+    "key": "exam",
+    "language": "en-US",
+    "value": "Exam"
+  },
+  {
+    "key": "fall",
+    "language": "ar-SA",
+    "value": "الفصل الأول"
+  },
+  {
+    "key": "fall",
+    "language": "en-US",
+    "value": "Fall"
+  },
+  {
+    "key": "final",
+    "language": "ar-SA",
+    "value": "النهائي"
+  },
+  {
+    "key": "final",
+    "language": "en-US",
+    "value": "Final"
+  },
+  {
+    "key": "first",
+    "language": "ar-SA",
+    "value": "الأول"
+  },
+  {
+    "key": "first",
+    "language": "en-US",
+    "value": "First"
+  },
+  {
+    "key": "incorrect",
+    "language": "en-US",
+    "value": "Incorrect details"
+  },
+  {
+    "key": "midterm",
+    "language": "ar-SA",
+    "value": "منتصف الفصل"
+  },
+  {
+    "key": "midterm",
+    "language": "en-US",
+    "value": "Midterm"
+  },
+  {
+    "key": "my_resources",
+    "language": "ar-SA",
+    "value": "أوراقك"
+  },
+  {
+    "key": "my_resources",
+    "language": "en-US",
+    "value": "My Resources"
+  },
+  {
+    "key": "not_visible",
+    "language": "ar-SA",
+    "value": "مخفي"
+  },
+  {
+    "key": "not_visible",
+    "language": "en-US",
+    "value": "Not visible"
+  },
+  {
+    "key": "note",
+    "language": "ar-SA",
+    "value": "ملاحظة"
+  },
+  {
+    "key": "note",
+    "language": "en-US",
+    "value": "Note"
+  },
+  {
+    "key": "other",
+    "language": "en-US",
+    "value": "Other"
+  },
+  {
+    "key": "project",
+    "language": "ar-SA",
+    "value": "مشروع"
+  },
+  {
+    "key": "project",
+    "language": "en-US",
+    "value": "Project"
+  },
+  {
+    "key": "quiz",
+    "language": "ar-SA",
+    "value": "اختبار قصير "
+  },
+  {
+    "key": "quiz",
+    "language": "en-US",
+    "value": "Quiz"
+  },
+  {
+    "key": "quiz1",
+    "language": "ar-SA",
+    "value": "اختبار قصير 1"
+  },
+  {
+    "key": "quiz1",
+    "language": "en-US",
+    "value": "Quiz 1"
+  },
+  {
+    "key": "quiz2",
+    "language": "ar-SA",
+    "value": "اختبار قصير 2"
+  },
+  {
+    "key": "quiz2",
+    "language": "en-US",
+    "value": "Quiz 2"
+  },
+  {
+    "key": "quiz3",
+    "language": "ar-SA",
+    "value": "اختبار قصير 3"
+  },
+  {
+    "key": "quiz3",
+    "language": "en-US",
+    "value": "Quiz 3"
+  },
+  {
+    "key": "quiz4",
+    "language": "ar-SA",
+    "value": "اختبار قصير 4"
+  },
+  {
+    "key": "quiz4",
+    "language": "en-US",
+    "value": "Quiz 4"
+  },
+  {
+    "key": "quiz5",
+    "language": "ar-SA",
+    "value": "اختبار قصير 5"
+  },
+  {
+    "key": "quiz5",
+    "language": "en-US",
+    "value": "Quiz 5"
+  },
+  {
+    "key": "quiz6",
+    "language": "ar-SA",
+    "value": "اختبار قصير 6"
+  },
+  {
+    "key": "quiz6",
+    "language": "en-US",
+    "value": "Quiz 6"
+  },
+  {
+    "key": "resource_details",
+    "language": "ar-SA",
+    "value": "تفاصيل الورقةَ"
+  },
+  {
+    "key": "resource_details",
+    "language": "en-US",
+    "value": "Resource Details"
+  },
+  {
+    "key": "review",
+    "language": "ar-SA",
+    "value": "أوراق  تحت المراجعة"
+  },
+  {
+    "key": "review",
+    "language": "en-US",
+    "value": "Resources Under Review"
+  },
+  {
+    "key": "second",
+    "language": "ar-SA",
+    "value": "الثاني"
+  },
+  {
+    "key": "second",
+    "language": "en-US",
+    "value": "Second"
+  },
+  {
+    "key": "slides",
+    "language": "ar-SA",
+    "value": "شرائح العرض"
+  },
+  {
+    "key": "slides",
+    "language": "en-US",
+    "value": "Slides"
+  },
+  {
+    "key": "solved",
+    "language": "ar-SA",
+    "value": "مع حل"
+  },
+  {
+    "key": "solved",
+    "language": "en-US",
+    "value": "Solved"
+  },
+  {
+    "key": "spring",
+    "language": "ar-SA",
+    "value": "الفصل الثاني"
+  },
+  {
+    "key": "spring",
+    "language": "en-US",
+    "value": "Spring"
+  },
+  {
+    "key": "summary",
+    "language": "ar-SA",
+    "value": "ملخص"
+  },
+  {
+    "key": "summary",
+    "language": "en-US",
+    "value": "Summary"
+  },
+  {
+    "key": "summer",
+    "language": "ar-SA",
+    "value": "الفصل الصيفي"
+  },
+  {
+    "key": "summer",
+    "language": "en-US",
+    "value": "Summer"
+  },
+  {
+    "key": "title_note",
+    "language": "ar-SA",
+    "value": "بالإنجليزية"
+  },
+  {
+    "key": "title_note",
+    "language": "en-US",
+    "value": "In English."
+  },
+  {
+    "key": "unrelated",
+    "language": "en-US",
+    "value": "Unrelated/Harmful content"
+  },
+  {
+    "key": "unsolved",
+    "language": "ar-SA",
+    "value": "بلا حل"
+  },
+  {
+    "key": "unsolved",
+    "language": "en-US",
+    "value": "Unsolved"
+  },
+  {
+    "key": "unverified",
+    "language": "ar-SA",
+    "value": "غير موثوق"
+  },
+  {
+    "key": "unverified",
+    "language": "en-US",
+    "value": "Unverified"
+  },
+  {
+    "key": "unverified_resource",
+    "language": "ar-SA",
+    "value": "أوراق غير موثوقة"
+  },
+  {
+    "key": "unverified_resource",
+    "language": "en-US",
+    "value": "Unverified Resources"
+  },
+  {
+    "key": "verified",
+    "language": "ar-SA",
+    "value": "موثوق"
+  },
+  {
+    "key": "verified",
+    "language": "en-US",
+    "value": "Verified"
+  },
+  {
+    "key": "visible",
+    "language": "ar-SA",
+    "value": "مُعروض"
+  },
+  {
+    "key": "visible",
+    "language": "en-US",
+    "value": "Visible"
+  }
+]

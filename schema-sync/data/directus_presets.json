@@ -1,0 +1,263 @@
+[
+  {
+    "bookmark": "$t:unverified_resource",
+    "collection": "resource",
+    "color": "#E5A50A",
+    "filter": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "unverified"
+          }
+        }
+      ]
+    },
+    "icon": "circle",
+    "layout": "tabular",
+    "layout_options": {
+      "tabular": {
+        "widths": {
+          "course": 347,
+          "files": 101,
+          "id": 98,
+          "semester": 116,
+          "status": 32,
+          "type": 100,
+          "year": 95
+        }
+      }
+    },
+    "layout_query": {
+      "tabular": {
+        "fields": [
+          "status",
+          "id",
+          "course",
+          "type",
+          "year",
+          "semester",
+          "date_updated",
+          "files",
+          "user_updated",
+          "user_created"
+        ],
+        "limit": 25,
+        "page": 1
+      }
+    },
+    "refresh_interval": null,
+    "role": null,
+    "search": null,
+    "user": null
+  },
+  {
+    "bookmark": "$t:my_resources",
+    "collection": "resource",
+    "color": "#9A9996",
+    "filter": {
+      "_and": [
+        {
+          "user_created": {
+            "_eq": "$CURRENT_USER"
+          }
+        }
+      ]
+    },
+    "icon": "sentiment_content",
+    "layout": "tabular",
+    "layout_options": {
+      "tabular": {
+        "widths": {
+          "course": 347,
+          "files": 101,
+          "id": 98,
+          "semester": 116,
+          "status": 32,
+          "type": 100,
+          "year": 95
+        }
+      }
+    },
+    "layout_query": {
+      "tabular": {
+        "fields": [
+          "status",
+          "id",
+          "course",
+          "type",
+          "year",
+          "semester",
+          "date_updated",
+          "files",
+          "user_updated",
+          "user_created"
+        ],
+        "limit": 25,
+        "page": 1
+      }
+    },
+    "refresh_interval": null,
+    "role": null,
+    "search": null,
+    "user": null
+  },
+  {
+    "bookmark": null,
+    "collection": "course",
+    "color": null,
+    "filter": null,
+    "icon": "bookmark",
+    "layout": "tabular",
+    "layout_options": {
+      "tabular": {
+        "widths": {
+          "course_id": 116,
+          "name_ar": 247,
+          "name_en": 332
+        }
+      }
+    },
+    "layout_query": {
+      "tabular": {
+        "fields": [
+          "course_id",
+          "name_en",
+          "name_ar",
+          "category",
+          "links",
+          "alt_names"
+        ],
+        "limit": 25
+      }
+    },
+    "refresh_interval": null,
+    "role": null,
+    "search": null,
+    "user": null
+  },
+  {
+    "bookmark": null,
+    "collection": "resource",
+    "color": null,
+    "filter": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "verified"
+          }
+        }
+      ]
+    },
+    "icon": "bookmark",
+    "layout": "tabular",
+    "layout_options": {
+      "tabular": {
+        "widths": {
+          "course": 347,
+          "files": 101,
+          "id": 96,
+          "semester": 116,
+          "status": 32,
+          "type": 100,
+          "year": 95
+        }
+      }
+    },
+    "layout_query": {
+      "tabular": {
+        "fields": [
+          "status",
+          "id",
+          "course",
+          "type",
+          "year",
+          "semester",
+          "date_updated",
+          "files",
+          "user_updated",
+          "user_created"
+        ],
+        "limit": 25,
+        "page": 1
+      }
+    },
+    "refresh_interval": null,
+    "role": null,
+    "search": null,
+    "user": null
+  },
+  {
+    "bookmark": null,
+    "collection": "directus_presets",
+    "color": null,
+    "filter": {
+      "_and": [
+        {
+          "user": {
+            "_null": true
+          }
+        }
+      ]
+    },
+    "icon": "bookmark",
+    "layout": "tabular",
+    "layout_options": null,
+    "layout_query": {
+      "tabular": {
+        "fields": [
+          "bookmark",
+          "id",
+          "role",
+          "user",
+          "collection",
+          "filter",
+          "layout_query",
+          "layout_options",
+          "user.email",
+          "icon",
+          "color",
+          "search",
+          "layout",
+          "refresh_interval"
+        ],
+        "limit": 25,
+        "page": 1
+      }
+    },
+    "refresh_interval": null,
+    "role": null,
+    "search": null,
+    "user": null
+  },
+  {
+    "bookmark": null,
+    "collection": "category",
+    "color": null,
+    "filter": null,
+    "icon": "bookmark",
+    "layout": "tabular",
+    "layout_options": {
+      "tabular": {
+        "widths": {
+          "color": 32,
+          "name_ar": 232,
+          "name_en": 180
+        }
+      }
+    },
+    "layout_query": {
+      "tabular": {
+        "fields": [
+          "color",
+          "name_en",
+          "name_ar"
+        ],
+        "limit": 25
+      }
+    },
+    "refresh_interval": null,
+    "role": null,
+    "search": null,
+    "user": null
+  }
+]
