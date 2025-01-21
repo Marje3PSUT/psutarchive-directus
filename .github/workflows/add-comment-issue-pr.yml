@@ -18,4 +18,4 @@ jobs:
             @Marje3PSUT/maintainers 
 
           pullRequestOpened: |
-            Please undraft your PR and add `ready-for-review` laben when you're done working, and you've verified your work against the [DoD (Definition of Done)](https://github.com/Marje3PSUT/.github/blob/main/DoD.md) document.
+            Please undraft your PR and add the `ready-for-review` label to the issue when you're done working, and you've verified your work against the [DoD (Definition of Done)](https://github.com/Marje3PSUT/.github/blob/main/DoD.md) document.
