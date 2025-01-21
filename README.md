@@ -18,4 +18,4 @@ This repository houses the [directus-schema-sync](https://github.com/bcc-code/di
 
 Export: `docker exec -it psutarchive-dev-directus npx directus schema-sync import`
 
-Import: `docker exec -it psutarchive-dev-directus npx directus schema-sync export`
+Import: `docker exec -it psutarchive-dev-directus npx directus schema-sync expo
