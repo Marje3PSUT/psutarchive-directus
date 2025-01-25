@@ -1,29 +1,38 @@
 services:
-  psutarchive-dev-directus:
-    container_name: psutarchive-dev-directus
-    build: .
-    command: >
-      sh -c "node cli.js bootstrap --skipAdminInit
-      && pm2-runtime start ecosystem.config.cjs"
-    ports:
-      - 8055:8055
-    volumes:
-      - .env:/directus/.env
-      - ./schema-sync:/directus/schema-sync
-    networks:
-      - psutarchive-dev-network
-
-  psutarchive-dev-db:
-    container_name: psutarchive-dev-db
-    image: postgres:14.5-alpine
-    ports:
-      - 5432:5432
+  postgres-dev:
+    container_name: postgres-dev
+    image: postgres:17.2-alpine
+    healthcheck:
+      test: [ "CMD", "pg_isready", "--host=localhost", "--username=directus" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_interval: 5s
+      start_period: 2s
+    network_mode: host
+    tmpfs:
+      - /var/lib/postgresql/data
     environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_DB: ${DB_DATABASE}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    networks:
-      - psutarchive-dev-network
-
-networks:
-  psutarchive-dev-network:
+      - POSTGRES_DB=sampledb
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=pass123
+  directus:
+    build: .
+    network_mode: host
+    depends_on:
+      postgres-dev:
+        condition: service_healthy
+    volumes:
+      - ./configs:/configs
+      - ./translations:/translations
+    environment:
+      SECRET: "a-secret-here"
+      DB_CLIENT: "pg"
+      DB_HOST: "localhost"
+      DB_PORT: "5432"
+      DB_DATABASE: "sampledb"
+      DB_USER: "admin"
+      DB_PASSWORD: "pass123"
+      ADMIN_EMAIL: "admin@email.com"
+      ADMIN_PASSWORD: "123"
+      SETTINGS_FILE_PATH: /configs/settings.yaml

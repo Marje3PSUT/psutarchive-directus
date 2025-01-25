@@ -1,0 +1,17 @@
+settings:
+  project_name: "PSUTArchive Development"
+  default_language: "en_US"
+  project_color: "#AA4A44"
+  project_logo: null
+  project_url: null
+  project_descriptor: null
+  public_note: null
+  custom_css: null
+  public_foreground: null
+  public_background: null
+  auth_login_attempts: 5
+  auth_password_policy: null
+  storage_asset_transform: null
+  storage_asset_presets: []
+  custom_aspect_ratios: []
+  storage_default_folder: null

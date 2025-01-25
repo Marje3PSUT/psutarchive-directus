@@ -1,16 +1,23 @@
+FROM node:20-bookworm AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+FROM base AS builder 
+
+WORKDIR /app
+COPY extensions/psutarchive-essentials/package.json .
+RUN pnpm i
+COPY extensions/psutarchive-essentials/ /app
+RUN pnpm run build
+
 FROM directus/directus:10.11.1
 
-USER root
+WORKDIR /directus
+COPY --from=builder /app/ extensions/psutarchive-essentials/
+COPY translations/ ./translations
 
-# Enable corepack and prepare pnpm
-RUN corepack enable \
- && corepack prepare pnpm@8.9.0 --activate
-
-USER node
-
-# Install Directus extensions in a single pnpm command
-# Force docker to skip caching to install the latest extentions
-ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
-
-RUN pnpm add directus-extension-psutarchive-bundle@latest
-RUN pnpm add directus-extension-schema-sync@latest
+CMD : \
+    && node cli.js bootstrap \
+    && node cli.js start \
+    ;
