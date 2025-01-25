@@ -14,7 +14,10 @@ DATA_TABLES=(
   "directus_migrations"
 )
 
-CONTAINER_NAME="postgres-dev"
+CONTAINER_NAME="psutarchive-postgres-dev"
+NETWORK_NAME="psutarchive-postgres-dev"
+VOLUME_NAME="psutarchive-postgres-dev"
+
 DB_URL="jdbc:postgresql://localhost:5432/sampledb"
 DB_USER="admin"
 DB_PASSWORD="pass123"
