@@ -38,3 +38,8 @@ generate_table_params() {
     done
     echo "$table_params"
 }
+
+create_tmp() {
+  local tmp_dir=$1
+  mkdir -p $tmp_dir
+}

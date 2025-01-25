@@ -2,6 +2,7 @@
 
 source config.sh
 source helpers/dump-utils.sh
+create_tmp $TMP_DIR
 
 if [ -z "$1" ]; then
   echo "Error: No argument provided. Please specify the issue number.."

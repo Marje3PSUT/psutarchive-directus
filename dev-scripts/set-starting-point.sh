@@ -2,6 +2,7 @@
 
 source config.sh
 source helpers/dump-utils.sh
+create_tmp $TMP_DIR
 
 echo "Deleting previous diffs..."
 OLD_DIFFS=$(ls $TMP_DIR)
