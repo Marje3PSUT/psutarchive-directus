@@ -35,7 +35,6 @@ export default defineHook(({init}, {logger, services, database, getSchema}) => {
     const {SettingsService} = services;
     const settingsService = new SettingsService({database, schema})
     try {
-      delete settings["module_bar"]
       await settingsService.upsertOne(settings);
     } catch (e) {
       throw Error(`Error loading settings from env: ${e["message"]}`)
