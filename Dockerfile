@@ -14,9 +14,17 @@ RUN pnpm run build
 FROM directus/directus:10.11.1
 
 WORKDIR /directus
+USER root
+RUN corepack enable \
+ && corepack prepare pnpm@8.9.0 --activate
+RUN apk add tini
+USER node
+RUN pnpm add directus-extension-psutarchive-bundle@latest
+
 COPY --from=builder /app/ extensions/psutarchive-essentials/
 COPY translations/ ./translations
 
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD : \
     && node cli.js bootstrap \
     && node cli.js start \

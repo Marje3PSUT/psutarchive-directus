@@ -26,21 +26,24 @@ echo "Generating a changeset reflecting changes since the last diff..."
 liquibase diffChangeLog \
     --url "offline:postgresql?snapshot=${SNAPSHOT_FILE}" \
     --changeLogFile "$UP_CHANGELOG_PATH" \
-    --referenceUrl "$DB_URL" \
-    --referenceUsername "$DB_USER" \
-    --referencePassword "$DB_PASSWORD" \
+    --referenceUrl "$DATABASE_URL" \
+    --referenceUsername "$DATABASE_USER" \
+    --referencePassword "$DATABASE_PASSWORD" \
     --author="$(git config user.name)"
 liquibase diffChangeLog \
     --referenceURL "offline:postgresql?snapshot=${SNAPSHOT_FILE}" \
     --changeLogFile "$DOWN_CHANGELOG_PATH" \
-    --Url "$DB_URL" \
-    --Username "$DB_USER" \
-    --Password "$DB_PASSWORD" \
+    --Url "$DATABASE_URL" \
+    --Username "$DATABASE_USER" \
+    --Password "$DATABASE_PASSWORD" \
     --author="$(git config user.name)"
 
 
 echo "Dumping the database from Docker container $CONTAINER_NAME..."
-dump_database_from_docker "$CONTAINER_NAME" "$DB_USER" "$DUMP_AFTER" "$DB_NAME" "$TMP_DIR" "${DATA_TABLES[@]}"
+dump_database_from_docker "$CONTAINER_NAME" "$DATABASE_USER" "$DUMP_AFTER" "$DB_NAME" "$TMP_DIR" "${DATA_TABLES[@]}"
+
+sed -i 's/NULL::character varying/NULL/g' $UP_CHANGELOG_PATH
+sed -i 's/NULL::character varying/NULL/g' $DOWN_CHANGELOG_PATH
 
 up_contents=$(tail -n +3 "$UP_CHANGELOG_PATH" | head -n -1 | grep -v changeSet)
 down_contents=$(tail -n +3 "$DOWN_CHANGELOG_PATH" | head -n -1 | grep -v changeSet)

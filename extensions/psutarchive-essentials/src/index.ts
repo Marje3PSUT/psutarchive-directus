@@ -22,7 +22,9 @@ export default defineHook(({init}, {logger, services, database, getSchema}) => {
       process.exit(1)
     }
     try {
-      return yaml.parse(readFileSync(path, 'utf-8'))["settings"];
+      let parsedSettings = yaml.parse(readFileSync(path, 'utf-8'))["settings"];
+      parsedSettings["id"] = 1
+      return parsedSettings;
     } catch (e) {
       throw Error(`Error try to access ${path}: ${e["message"]}`)
     }
@@ -105,8 +107,14 @@ export default defineHook(({init}, {logger, services, database, getSchema}) => {
   init("cli.before", async () => {
     const schema = await getSchema()
 
-    await applySettings(schema);
-    await applyTranslations(schema);
+    try {
+      await applySettings(schema);
+      await applyTranslations(schema);
+    }
+    catch (e) {
+      logger.error(`Something went wrong: ${e["message"]}`)
+      process.exit(1)
+    }
   })
 })
 

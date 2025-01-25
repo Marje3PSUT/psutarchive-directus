@@ -11,12 +11,12 @@ if [ -n "$OLD_DIFFS" ]; then
 fi
 
 SNAPSHOT_FILE="snapshot-before-$(date +%Y-%m-%dT%H:%M:%S).json"
-liquibase snapshot --url jdbc:postgresql://localhost:5432/sampledb \
-  --username $DB_USER \
-  --password $DB_PASSWORD \
+liquibase snapshot --url jdbc:postgresql://localhost:5432/$DB_NAME \
+  --username $DATABASE_USER \
+  --password $DATABASE_PASSWORD \
   --snapshot-format=json \
   --output-file "${TMP_DIR}temp.json"
 mv ${TMP_DIR}temp.json ${TMP_DIR}${SNAPSHOT_FILE}
 
 echo "Dumping the database from Docker container $CONTAINER_NAME..."
-dump_database_from_docker "$CONTAINER_NAME" "$DB_USER" "$DUMP_BEFORE" "$DB_NAME" "$TMP_DIR" "${DATA_TABLES[@]}"
+dump_database_from_docker "$CONTAINER_NAME" "$DATABASE_USER" "$DUMP_BEFORE" "$DB_NAME" "$TMP_DIR" "${DATA_TABLES[@]}"

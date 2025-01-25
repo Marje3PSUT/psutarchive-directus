@@ -4,37 +4,57 @@ default: help
 help:
 	@grep -E '^[a-zA-Z0-9 -]+:.*#'  Makefile | while read -r l; do printf "\033[1;32m$$(echo $$l | cut -f 1 -d':')\033[00m:$$(echo $$l | cut -f 2- -d'#')\n"; done
 
+.PHONY: app
+app: # Runs an instance of the backend (env in the config.sh)
+	bash -c 'source dev-scripts/config.sh && \
+		docker build -t psutarchive-directus:latest . && \
+		docker run --rm --name $$APP_CONTAINER_NAME \
+		--network host \
+		--env-file <(env) \
+		-v ./configs:/configs \
+		psutarchive-directus:latest'
+
+.PHONY: admin
+admin: # Generate an admin account (based on env in the config.sh)
+	bash -c 'source dev-scripts/config.sh && \
+		docker exec $$APP_CONTAINER_NAME node cli.js users create --email $$ADMIN_EMAIL \
+		--password $$ADMIN_PASSWORD --role c9e50c86-d0f3-462a-850d-8872ea49fa09'
+
+.PHONY: contrib
+contrib: # Generate a contributor account (based on env in the config.sh)
+	bash -c 'source dev-scripts/config.sh && \
+		docker exec $$APP_CONTAINER_NAME node cli.js users create --email $$CONTRIBUTOR_EMAIL \
+		--password $$CONTRIBUTOR_PASSWORD --role 46ee07b4-b91a-40cd-be4b-94dcd16af0bd'
+
+.PHONY: mod
+mod: # Generate a moderator account (based on env in the config.sh)
+	bash -c 'source dev-scripts/config.sh && \
+		docker exec $$APP_CONTAINER_NAME node cli.js users create --email $$MODERATOR_EMAIL \
+		--password $$MODERATOR_PASSWORD --role c26ce4ed-9eea-4b1a-9f74-6496c3f105e4'
+
 .PHONY: temp-db
-temp-db: create-network # Create a non-persistent db for testing purposes.
+temp-db: # Create a non-persistent db for testing purposes.
 	bash -c 'source dev-scripts/config.sh && \
 		docker run --rm --name "$$CONTAINER_NAME" \
 		  -e POSTGRES_DB="$$DB_NAME" \
-		  -e POSTGRES_USER="$$DB_USER" \
-		  -e POSTGRES_PASSWORD="$$DB_PASSWORD" \
-		  -p 5432:5432 \
-		  --network="$$NETWORK_NAME" \
+		  -e POSTGRES_USER="$$DATABASE_USER" \
+		  -e POSTGRES_PASSWORD="$$DATABASE_PASSWORD" \
+		  --network host \
 		  --tmpfs /var/lib/postgresql/data:rw \
 		  postgres:17.2-alpine'
 
 .PHONY: persistent-db
-persistent-db: create-network # Create a persistent db for testing purposes.
+persistent-db: # Create a persistent db for testing purposes.
 	bash -c 'source dev-scripts/config.sh && \
 		docker volume inspect $$VOLUME_NAME >/dev/null 2>&1 || docker volume create $$VOLUME_NAME && \
 		docker run --rm --name "$$CONTAINER_NAME" \
 		  -e POSTGRES_DB="$$DB_NAME" \
-		  -e POSTGRES_USER="$$DB_USER" \
-		  -e POSTGRES_PASSWORD="$$DB_PASSWORD" \
-		  -p 5432:5432 \
+		  -e POSTGRES_USER="$$DATABASE_USER" \
+		  -e POSTGRES_PASSWORD="$$DATABASE_PASSWORD" \
+		  --network host \
 		  -v $$VOLUME_NAME:/var/lib/postgresql/data \
-		  --network="$$NETWORK_NAME" \
 		  postgres:17.2-alpine'
 
 clean: # Delete allocated resources (including persistent db data) if it exists.
 	bash -c 'source dev-scripts/config.sh && \
-		docker volume inspect "$$VOLUME_NAME" >/dev/null 2>&1 && docker volume rm "$$VOLUME_NAME" || echo "Volume does not exist." && \
-		docker network inspect "$$NETWORK_NAME" >/dev/null 2>&1 && docker network rm "$$NETWORK_NAME" || echo "Network does not exist."'
-
-# Helper command (not meant to be called directly)
-create-network:
-	bash -c 'source dev-scripts/config.sh && \
-		docker network inspect "$$NETWORK_NAME" >/dev/null 2>&1 || docker network create "$$NETWORK_NAME"'
+		docker volume inspect "$$VOLUME_NAME" >/dev/null 2>&1 && docker volume rm "$$VOLUME_NAME" || echo "Volume does not exist."'
