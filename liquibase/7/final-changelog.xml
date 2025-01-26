@@ -384,6 +384,14 @@
             <column name="report_error_url" type="VARCHAR(255)"/>
             <column name="report_bug_url" type="VARCHAR(255)"/>
             <column name="report_feature_url" type="VARCHAR(255)"/>
+            <column defaultValueBoolean="false" name="public_registration" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="public_registration_verify_email" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="public_registration_role" type="UUID"/>
+            <column name="public_registration_email_filter" type="JSON"/>
         </createTable>
         <createTable tableName="directus_shares">
             <column name="id" type="UUID">
@@ -633,6 +641,7 @@
             <column name="user_agent" type="TEXT"/>
             <column name="share" type="UUID"/>
             <column name="origin" type="VARCHAR(255)"/>
+            <column name="next_token" type="VARCHAR(64)"/>
         </createTable>
         <createTable tableName="directus_translations">
             <column name="id" type="UUID">
@@ -773,6 +782,10 @@
                                  constraintName="directus_settings_public_foreground_foreign" deferrable="false"
                                  initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" referencedTableName="directus_files" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="public_registration_role" baseTableName="directus_settings"
+                                 constraintName="directus_settings_public_registration_role_foreign" deferrable="false"
+                                 initiallyDeferred="false" onDelete="SET NULL" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="directus_roles" validate="true"/>
         <addForeignKeyConstraint baseColumnNames="storage_default_folder" baseTableName="directus_settings"
                                  constraintName="directus_settings_storage_default_folder_foreign" deferrable="false"
                                  initiallyDeferred="false" onDelete="SET NULL" onUpdate="NO ACTION"
@@ -844,7 +857,6 @@
                                  initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
         <sqlFile path="data-after.sql" relativeToChangelogFile="true"/>
-
     </changeSet>
     <changeSet id="7-1" author="HDDTHR">
         <tagDatabase tag="7"/>

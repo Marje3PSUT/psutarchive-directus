@@ -118,6 +118,51 @@ ALTER TABLE public.directus_dashboards DISABLE TRIGGER ALL;
 ALTER TABLE public.directus_dashboards ENABLE TRIGGER ALL;
 
 --
+-- Data for Name: directus_extensions; Type: TABLE DATA; Schema: public; Owner: directus
+--
+
+ALTER TABLE public.directus_extensions DISABLE TRIGGER ALL;
+
+INSERT INTO public.directus_extensions (enabled, id, folder, source, bundle)
+VALUES (true, 'a0252a64-3a40-4530-8b03-af3e1b7a2826', 'psutarchive-essentials', 'local', NULL);
+INSERT INTO public.directus_extensions (enabled, id, folder, source, bundle)
+VALUES (true, '10fc930b-399a-45b6-892a-7a83ac6d72f4', 'directus-extension-startup-essentials', 'local',
+        'a0252a64-3a40-4530-8b03-af3e1b7a2826');
+INSERT INTO public.directus_extensions (enabled, id, folder, source, bundle)
+VALUES (true, 'bae5d5e5-d28a-43a7-9fea-243d7eb7299c', 'directus-extension-delete-orphan-entities', 'local',
+        'a0252a64-3a40-4530-8b03-af3e1b7a2826');
+INSERT INTO public.directus_extensions (enabled, id, folder, source, bundle)
+VALUES (true, 'ce76219c-d848-4814-bfd1-61cde354bc0f', 'directus-extension-delete-unused-files', 'local',
+        'a0252a64-3a40-4530-8b03-af3e1b7a2826');
+INSERT INTO public.directus_extensions (enabled, id, folder, source, bundle)
+VALUES (true, 'f05f90c5-34d8-4f76-aee4-511e69e0ebe9', 'directus-extension-module-permissions', 'local',
+        'a0252a64-3a40-4530-8b03-af3e1b7a2826');
+INSERT INTO public.directus_extensions (enabled, id, folder, source, bundle)
+VALUES (true, '571a16af-bb44-4275-a754-19a568b354bd', 'directus-extension-slug', 'local',
+        'a0252a64-3a40-4530-8b03-af3e1b7a2826');
+INSERT INTO public.directus_extensions (enabled, id, folder, source, bundle)
+VALUES (true, '20b7fd60-97b4-478d-a05f-b9073cbbc8af', 'directus-extension-tutorial-module', 'local',
+        'a0252a64-3a40-4530-8b03-af3e1b7a2826');
+INSERT INTO public.directus_extensions (enabled, id, folder, source, bundle)
+VALUES (true, '01910187-d014-4f2f-8f57-430bf38abe82', 'directus-extension-year-validation', 'local',
+        'a0252a64-3a40-4530-8b03-af3e1b7a2826');
+INSERT INTO public.directus_extensions (enabled, id, folder, source, bundle)
+VALUES (true, '08538aa7-0dd2-4fb4-88b9-615b3c75a25a', 'directus-extension-limit-resources', 'local',
+        'a0252a64-3a40-4530-8b03-af3e1b7a2826');
+INSERT INTO public.directus_extensions (enabled, id, folder, source, bundle)
+VALUES (true, '09d3c8b0-2161-48d4-94d2-c8a9269157d9', 'directus-extension-prevent-duplicate-exams', 'local',
+        'a0252a64-3a40-4530-8b03-af3e1b7a2826');
+INSERT INTO public.directus_extensions (enabled, id, folder, source, bundle)
+VALUES (true, '3fbfb5e2-9d3d-4bb7-b3dd-805ea049c0ad', 'directus-extension-limit-total-upload', 'local',
+        'a0252a64-3a40-4530-8b03-af3e1b7a2826');
+INSERT INTO public.directus_extensions (enabled, id, folder, source, bundle)
+VALUES (true, '4b66a2ab-97c5-49ae-922b-6b4cdc290650', 'directus-extension-show-note-data', 'local',
+        'a0252a64-3a40-4530-8b03-af3e1b7a2826');
+
+
+ALTER TABLE public.directus_extensions ENABLE TRIGGER ALL;
+
+--
 -- Data for Name: directus_fields; Type: TABLE DATA; Schema: public; Owner: directus
 --
 
@@ -659,6 +704,10 @@ INSERT INTO public.directus_migrations (version, name, "timestamp")
 VALUES ('20240305A', 'Change Useragent Type', '2024-04-10 15:37:27.143868+00');
 INSERT INTO public.directus_migrations (version, name, "timestamp")
 VALUES ('20240311A', 'Deprecate Webhooks', '2024-04-10 15:37:27.249486+00');
+INSERT INTO public.directus_migrations (version, name, "timestamp")
+VALUES ('20240422A', 'Public Registration', '2025-01-26 05:11:37.440598+00');
+INSERT INTO public.directus_migrations (version, name, "timestamp")
+VALUES ('20240515A', 'Add Session Window', '2025-01-26 05:11:37.445054+00');
 
 
 ALTER TABLE public.directus_migrations ENABLE TRIGGER ALL;
@@ -1892,6 +1941,11 @@ VALUES (492, NULL, '76a23796-4e8b-48f1-9ff5-11849f0e6dd7', NULL, 'resource', '',
         NULL, '{"_and":[{"status":{"_eq":"verified"}}]}', 'bookmark', NULL);
 INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
                                      layout_options, refresh_interval, filter, icon, color)
+VALUES (520, NULL, '6460f0c7-52ab-429b-a613-f692e651dfa8', NULL, 'category', NULL, 'tabular',
+        '{"tabular":{"limit":25,"fields":["color","name_en","name_ar"],"page":1}}',
+        '{"tabular":{"widths":{"color":32,"name_en":180,"name_ar":232}}}', NULL, NULL, 'bookmark', NULL);
+INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
+                                     layout_options, refresh_interval, filter, icon, color)
 VALUES (493, NULL, '780dcfbc-b750-4343-b2fc-0acbb09defa4', NULL, 'resource', NULL, 'tabular',
         '{"tabular":{"limit":25,"fields":["status","id","course","type","year","semester","date_updated","files","user_updated","user_created"],"page":1}}',
         '{"tabular":{"widths":{"status":32,"id":96,"course":347,"type":100,"year":95,"semester":116,"files":101}}}',
@@ -2041,11 +2095,6 @@ INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, sea
 VALUES (509, NULL, '58286161-65cb-460d-b7b8-fc2af640a60d', NULL, 'course', 'Discret', 'tabular',
         '{"tabular":{"limit":25,"fields":["course_id","name_en","name_ar","category","links","alt_names"],"page":1}}',
         '{"tabular":{"widths":{"course_id":116,"name_en":332,"name_ar":247}}}', NULL, NULL, 'bookmark', NULL);
-INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
-                                     layout_options, refresh_interval, filter, icon, color)
-VALUES (520, NULL, '6460f0c7-52ab-429b-a613-f692e651dfa8', NULL, 'category', NULL, 'tabular',
-        '{"tabular":{"limit":25,"fields":["color","name_en","name_ar"],"page":1}}',
-        '{"tabular":{"widths":{"color":32,"name_en":180,"name_ar":232}}}', NULL, NULL, 'bookmark', NULL);
 INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
                                      layout_options, refresh_interval, filter, icon, color)
 VALUES (519, NULL, '6460f0c7-52ab-429b-a613-f692e651dfa8', NULL, 'course', NULL, 'tabular',

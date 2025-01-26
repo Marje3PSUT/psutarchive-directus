@@ -55,6 +55,6 @@ persistent-db: # Create a persistent db for testing purposes.
 		  -v $$VOLUME_NAME:/var/lib/postgresql/data \
 		  postgres:17.2-alpine'
 
-clean: # Delete allocated resources (including persistent db data) if it exists.
+clean: # Delete persistent db data if it exists.
 	bash -c 'source dev-scripts/config.sh && \
 		docker volume inspect "$$VOLUME_NAME" >/dev/null 2>&1 && docker volume rm "$$VOLUME_NAME" || echo "Volume does not exist."'

@@ -12,6 +12,7 @@ DATA_TABLES=(
   "directus_relations"
   "directus_collections"
   "directus_migrations"
+  "directus_extensions"
 )
 
 APP_CONTAINER_NAME="psutarchive-directus-dev"

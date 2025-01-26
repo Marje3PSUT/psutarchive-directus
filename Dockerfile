@@ -6,26 +6,23 @@ RUN corepack enable
 FROM base AS builder 
 
 WORKDIR /app
-COPY extensions/psutarchive-essentials/package.json .
+COPY extensions/package.json .
+COPY extensions/patches patches/
 RUN pnpm i
-COPY extensions/psutarchive-essentials/ /app
+COPY extensions/ /app
 RUN pnpm run build
 
 FROM directus/directus:10.11.1
 
-WORKDIR /directus
 USER root
-RUN corepack enable \
- && corepack prepare pnpm@8.9.0 --activate
 RUN apk add tini
 USER node
-RUN pnpm add directus-extension-psutarchive-bundle@latest
+
+WORKDIR /directus
 
 COPY --from=builder /app/ extensions/psutarchive-essentials/
 COPY translations/ ./translations
 
-ENTRYPOINT ["/sbin/tini", "--"]
-CMD : \
-    && node cli.js bootstrap \
-    && node cli.js start \
-    ;
+ENTRYPOINT ["/sbin/tini", "--" ]
+CMD node cli.js bootstrap \
+    && node cli.js start
