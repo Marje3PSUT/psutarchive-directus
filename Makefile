@@ -14,6 +14,16 @@ app: # Runs an instance of the backend (env in the config.sh)
 		-v ./configs:/configs \
 		psutarchive-directus:latest'
 
+app-dev: # Runs an instance of the backend *with extension hot-reloads* (env in the config.sh)\n
+	bash -c 'source dev-scripts/config.sh && \
+		docker build -t psutarchive-directus:latest . && \
+		docker run --rm --name $$APP_CONTAINER_NAME \
+		--network host \
+		--env-file <(env) \
+		-v ./configs:/configs \
+		-v ./extensions:/directus/extensions/psutarchive-essentials \
+		psutarchive-directus:latest'
+
 .PHONY: admin
 admin: # Generate an admin account (based on env in the config.sh)
 	bash -c 'source dev-scripts/config.sh && \
@@ -27,7 +37,7 @@ contrib: # Generate a contributor account (based on env in the config.sh)
 		--password $$CONTRIBUTOR_PASSWORD --role 46ee07b4-b91a-40cd-be4b-94dcd16af0bd'
 
 .PHONY: mod
-mod: # Generate a moderator account (based on env in the config.sh)
+mod: # Generate a moderator account (based on env in the config.sh)\n
 	bash -c 'source dev-scripts/config.sh && \
 		docker exec $$APP_CONTAINER_NAME node cli.js users create --email $$MODERATOR_EMAIL \
 		--password $$MODERATOR_PASSWORD --role c26ce4ed-9eea-4b1a-9f74-6496c3f105e4'

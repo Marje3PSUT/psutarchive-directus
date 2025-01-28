@@ -11,6 +11,13 @@ Directus backend for PSUTArchive. Frontend can be found [here](https://github.co
 
 ## Getting Started
 
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Marje3PSUT/psutarchive-directus.git
+   cd psutarchive-directus
+   ```
+2. Review the environment variables `dev-scripts/config.sh`
+
 Review the [DEVELOPMENT.md](DEVELOPMENT.md) document for guides and FAQs.
 
 ## Contributing
