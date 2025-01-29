@@ -8,16 +8,15 @@
 ---
 ## 1. Database Migration Workflow
 
-**Note**: The migration scripts (`set-starting-point.sh`, `generate-changeset.sh`) must be executed from within the `dev-scripts` directory. Change to this directory before running commands and return to the project root afterward.
 ### Developing the backend (through migrations)
 1. Set a starting point (before making schema changes, and after deploying database):
    ```bash
-   ./set-starting-point.sh
+   ./dev-scripts/set-starting-point.sh
    ```
 2. Make your database changes via Directus Admin UI
 3. Generate a changeset for issue #XYZ:
    ```bash
-   ./generate-changeset.sh XYZ
+   ./dev-scripts/generate-changeset.sh XYZ
    ```
 4. Manually review generated files in `.tmp/` and move to `liquibase/XYZ/`
 
@@ -36,7 +35,7 @@
 ```
 # Done once
 make persistent-db
-./update-database.sh
+./dev-scripts/update-database.sh
 make app-dev
 
 cd extensions
@@ -59,7 +58,7 @@ We want to add a new role called "Reviewer" to the Directus instance. This invol
 1. **Set Starting Point**  
    Before making any changes, set a starting point for the database after deploying and updating it:
    ```bash
-   ./set-starting-point.sh
+   ./dev-scripts/set-starting-point.sh
    ```
 
 2. **Create the Role in Directus**  
@@ -72,7 +71,7 @@ We want to add a new role called "Reviewer" to the Directus instance. This invol
 3. **Generate Changeset**  
    After creating the role, generate a changeset for issue #15 (example issue number):
    ```bash
-   ./generate-changeset.sh 15
+   ./dev-scripts/generate-changeset.sh 15
    ```
 
 4. **Review Generated Files**  
@@ -100,7 +99,7 @@ We want to add a new role called "Reviewer" to the Directus instance. This invol
    Apply the changeset to a fresh database:
    ```bash
    make temp-db
-   ./update-database.sh
+   ./dev-scripts/update-database.sh
    make app
    ```
    Verify that the "Reviewer" role exists in the Directus Admin UI.
@@ -114,7 +113,7 @@ We want to upgrade Directus from version `10.7.2` to `10.8.0`. This involves tes
 1. **Set Starting Point**  
    Before upgrading, set a starting point for the current database after deploying and updating:
    ```bash
-   ./set-starting-point.sh
+   ./dev-scripts/set-starting-point.sh
    ```
 
 2. **Update Dockerfile**  
@@ -136,7 +135,7 @@ We want to upgrade Directus from version `10.7.2` to `10.8.0`. This involves tes
 5. **Generate Changeset**  
    If there are schema changes, generate a changeset for issue #20 (example issue number):
    ```bash
-   ./generate-changeset.sh 20
+   ./dev-scripts/generate-changeset.sh 20
    ```
 
 7. **Review Generated Files**  
@@ -160,7 +159,7 @@ We want to upgrade Directus from version `10.7.2` to `10.8.0`. This involves tes
     Apply the changeset to a fresh database:
     ```bash
     make temp-db
-    ./update-database.sh
+    ./dev/scripts/update-database.sh
     make app
     ```
     Verify that the upgrade works as expected.

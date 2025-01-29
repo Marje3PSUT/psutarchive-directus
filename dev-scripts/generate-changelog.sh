@@ -1,7 +1,8 @@
 #!/bin/bash
 
-source config.sh
-source helpers/dump-utils.sh
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source $SCRIPT_DIR/config.sh
+source $SCRIPT_DIR/helpers/dump-utils.sh
 create_tmp $TMP_DIR
 
 if [ -z "$1" ]; then
