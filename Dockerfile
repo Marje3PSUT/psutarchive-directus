@@ -8,7 +8,7 @@ FROM base AS builder
 WORKDIR /app
 COPY extensions/package.json .
 COPY extensions/patches patches/
-RUN pnpm i
+RUN pnpm install
 COPY extensions/ /app
 RUN pnpm run build
 
@@ -17,9 +17,7 @@ FROM directus/directus:10.11.1
 USER root
 RUN apk add tini
 USER node
-
 WORKDIR /directus
-
 COPY --from=builder /app/ extensions/psutarchive-essentials/
 COPY translations/ ./translations
 

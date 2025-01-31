@@ -18,7 +18,7 @@
    ```bash
    ./dev-scripts/generate-changeset.sh XYZ
    ```
-4. Manually review generated files in `.tmp/` and move to `liquibase/XYZ/`
+4. Manually review generated files in `.tmp/` and move to `liquibase/changelogs/XYZ/`
 
 ---
 
@@ -81,7 +81,7 @@ We want to add a new role called "Reviewer" to the Directus instance. This invol
    - `.tmp/final-changelog.xml`: Contains the Liquibase changeset.
 
 5. **Move Changeset to Liquibase Directory**  
-   Move the  changeset to the `liquibase/15/` directory:
+   Move the  changeset to the `liquibase/changelogs/15/` directory:
    ```bash
    mkdir -p liquibase/15
    mv .tmp/final-changelog.xml liquibase/15/
@@ -90,7 +90,7 @@ We want to add a new role called "Reviewer" to the Directus instance. This invol
    ```
 
 6. **Update Master Changelog**  
-   Add the new changeset to `liquibase/changelog-master.xml`:
+   Add the new changeset to `liquibase/changelogs/changelog-master.xml`:
    ```xml
    <include file="15/final-changelog.xml" relativeToChangelogFile="true"/>
    ```
@@ -142,15 +142,15 @@ We want to upgrade Directus from version `10.7.2` to `10.8.0`. This involves tes
    Review the files in `.tmp/20/`, making sure to add to the generated changeset if needed.
 
 8. **Move Changeset
-   Move the changeset to the `liquibase/20/` directory:
+   Move the changeset to the `liquibase/changelogs/20/` directory:
    ```bash
    mkdir -p liquibase/20
-   mv .tmp/20/final-changelog.xml liquibase/20/
-   mv .tmp/20/data-after.sql liquibase/20/
+   mv .tmp/20/final-changelog.xml liquibase/changelogs/20/
+   mv .tmp/20/data-after.sql liquibase/changelogs/20/
    ```
 
 9. **Update Master Changelog**  
-   Add the new changeset to `liquibase/changelog-master.xml`:
+   Add the new changeset to `liquibase/changelogs/changelog-master.xml`:
    ```xml
    <include file="20/final-changelog.xml" relativeToChangelogFile="true"/>
    ```

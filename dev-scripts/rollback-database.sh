@@ -3,7 +3,7 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source $SCRIPT_DIR/config.sh
 
-LIQUIBASE_CHANGELOG=$(realpath -s --relative-to $(pwd) "$PROJECT_ROOT"liquibase/changelog-master.xml)
+LIQUIBASE_CHANGELOG=$(realpath -s --relative-to $(pwd) "$PROJECT_ROOT"liquibase/changelogs/changelog-master.xml)
 
 if [ -z "$1" ]; then
   echo "Error: No argument provided. Please specify the issue number.."
