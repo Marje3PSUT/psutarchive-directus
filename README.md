@@ -7,7 +7,6 @@ Directus backend for PSUTArchive. Frontend can be found [here](https://github.co
 - `build-essential`
 - Node.js, npm (LTS recommended)
 - Docker
-- [Liquibase](https://docs.liquibase.com/start/install/liquibase-linux.html)
 
 ## Getting Started
 
