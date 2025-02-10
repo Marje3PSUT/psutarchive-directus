@@ -1,5 +1,17 @@
 #!/bin/bash
 
+run_liquibase () {
+    local CHANGELOGS_PATH=$1
+    local TMP_PATH=$2
+    local LIQUIBASE_COMMAND=$3
+
+    docker run --rm -v $CHANGELOGS_PATH:/liquibase/changelogs \
+        -v $TMP_PATH:/liquibase/tmp \
+        --network host \
+        --user 1000:1001 \
+        liquibase/liquibase:4.31 $LIQUIBASE_COMMAND
+}
+
 generate_delete_statements() {
     local tables=("$@")
     local delete_statements=""

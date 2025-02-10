@@ -9,16 +9,35 @@
 ## 1. Database Migration Workflow
 
 ### Developing the backend (through migrations)
-1. Set a starting point (before making schema changes, and after deploying database):
+1. Set up the database and app as follows:
+   ```bash
+   make clean
+   make persistent-db      # or "temp-db" if desired
+   
+   # Separate terminal
+   ./dev-scripts/update-database.sh
+   make app                # or "app-dev" if developing extensions
+   ```
+2. Set a starting point:
    ```bash
    ./dev-scripts/set-starting-point.sh
    ```
-2. Make your database changes via Directus Admin UI
-3. Generate a changeset for issue #XYZ:
+3. Make your database changes via Directus Admin UI. Make changes as admin by running `make admin` and logging in using the values in the config.sh.
+4. Generate a changeset for issue #XYZ:
    ```bash
-   ./dev-scripts/generate-changeset.sh XYZ
+   ./dev-scripts/generate-changelog.sh XYZ
    ```
-4. Manually review generated files in `.tmp/` and move to `liquibase/changelogs/XYZ/`
+5. Manually review generated files in `.tmp/` and move to `liquibase/changelogs/XYZ/`
+6. Test your changeset with a workflow similar to this:
+   ```bash
+   # After shutting down db and directus
+   make clean
+   make temp-db
+   ./dev-scripts/update-database.sh
+   # Manually test if upgrade was successful, and make necessary changes.
+   # Test rolling back to previous issue
+   ./dev-scripts/rollback-database.sh <THE_ISSUE_NUMBER_BEFORE_YOURS>
+   ```
 
 ---
 
@@ -63,15 +82,15 @@ We want to add a new role called "Reviewer" to the Directus instance. This invol
 
 2. **Create the Role in Directus**  
    - Start the Directus instance:
-     ```bash
-     make app
-     ```
-   - Log in to the Directus Admin UI and create the "Reviewer" role with appropriate permissions.
+  ```bash
+  make app
+  ```
+  - Log in to the Directus Admin UI and create the "Reviewer" role with appropriate permissions.
 
 3. **Generate Changeset**  
    After creating the role, generate a changeset for issue #15 (example issue number):
    ```bash
-   ./dev-scripts/generate-changeset.sh 15
+   ./dev-scripts/generate-changelog.sh 15
    ```
 
 4. **Review Generated Files**  
@@ -135,7 +154,7 @@ We want to upgrade Directus from version `10.7.2` to `10.8.0`. This involves tes
 5. **Generate Changeset**  
    If there are schema changes, generate a changeset for issue #20 (example issue number):
    ```bash
-   ./dev-scripts/generate-changeset.sh 20
+   ./dev-scripts/generate-changelog.sh 20
    ```
 
 7. **Review Generated Files**  

@@ -11,8 +11,8 @@ if [ -z "$1" ]; then
 fi
 
 DUMP_FILE=$(ls $TMP_DIR | grep data-before)
-SNAPSHOT_FILE=$(ls $TMP_DIR/* | grep snapshot)
-if [ -z "$DUMP_FILE" ] && [ -z "$SNAPSHOT_FILE" ]; then
+SNAPSHOT_FILE_PATH=$(ls $TMP_DIR/* | grep snapshot)
+if [ -z "$DUMP_FILE" ] && [ -z "$SNAPSHOT_FILE_PATH" ]; then
   echo -e "No previous diff found!\nRun ./set-starting-point.sh before making any changes."
   exit 1
 fi
@@ -23,21 +23,22 @@ if [ -n "$OLD_CHANGESETS" ]; then
   ls $TMP_DIR/* | grep -v before | xargs rm
 fi
 
+SNAPSHOT_FILE="./tmp/$(ls $TMP_DIR/ | grep snapshot)"
 echo "Generating a changeset reflecting changes since the last diff..."
-liquibase diffChangeLog \
-    --url "offline:postgresql?snapshot=${SNAPSHOT_FILE}" \
-    --changeLogFile "$UP_CHANGELOG_PATH" \
-    --referenceUrl "$DATABASE_URL" \
-    --referenceUsername "$DATABASE_USER" \
-    --referencePassword "$DATABASE_PASSWORD" \
-    --author="$(git config user.name)"
-liquibase diffChangeLog \
-    --referenceURL "offline:postgresql?snapshot=${SNAPSHOT_FILE}" \
-    --changeLogFile "$DOWN_CHANGELOG_PATH" \
-    --Url "$DATABASE_URL" \
-    --Username "$DATABASE_USER" \
-    --Password "$DATABASE_PASSWORD" \
-    --author="$(git config user.name)"
+run_liquibase "${PROJECT_ROOT}"liquibase/changelogs $TMP_DIR "liquibase diffChangeLog \
+    --url offline:postgresql?snapshot=${SNAPSHOT_FILE} \
+    --changeLogFile tmp/$UP_CHANGELOG \
+    --referenceUrl $DATABASE_URL \
+    --referenceUsername $DATABASE_USER \
+    --referencePassword $DATABASE_PASSWORD \
+    --author=$(git config user.name)"
+run_liquibase "${PROJECT_ROOT}"liquibase/changelogs $TMP_DIR "liquibase diffChangeLog \
+    --referenceURL offline:postgresql?snapshot=${SNAPSHOT_FILE} \
+    --changeLogFile tmp/$DOWN_CHANGELOG \
+    --url $DATABASE_URL \
+    --username $DATABASE_USER \
+    --password $DATABASE_PASSWORD \
+    --author=$(git config user.name)"
 
 
 echo "Dumping the database from Docker container $CONTAINER_NAME..."
@@ -54,7 +55,7 @@ cat <<EOF > "$FINAL_CHANGELOG_PATH"
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+                        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.31.xsd">
 
     <changeSet id="$1" author="$(git config user.name)">
       $up_contents

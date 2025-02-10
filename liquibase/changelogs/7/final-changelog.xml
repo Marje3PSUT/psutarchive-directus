@@ -539,14 +539,6 @@
             </column>
             <column name="exam_data" type="INTEGER"/>
         </createTable>
-        <createTable tableName="report">
-            <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="report_pkey"/>
-            </column>
-            <column name="type" type="VARCHAR(255)"/>
-            <column name="complaint" type="TEXT"/>
-            <column name="resource" type="INTEGER"/>
-        </createTable>
         <addUniqueConstraint columnNames="operation" constraintName="directus_flows_operation_unique"
                              tableName="directus_flows"/>
         <addUniqueConstraint columnNames="reject" constraintName="directus_operations_reject_unique"
@@ -561,7 +553,6 @@
                              tableName="directus_users"/>
         <addUniqueConstraint columnNames="exam_data" constraintName="resource_exam_data_unique" tableName="resource"/>
         <addUniqueConstraint columnNames="note_data" constraintName="resource_note_data_unique" tableName="resource"/>
-        <addUniqueConstraint columnNames="resource" constraintName="report_resource_unique" tableName="report"/>
         <createTable tableName="about_page">
             <column autoIncrement="true" name="id" type="INTEGER">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="about_page_pkey"/>
@@ -824,10 +815,6 @@
                                  constraintName="directus_webhooks_migrated_flow_foreign" deferrable="false"
                                  initiallyDeferred="false" onDelete="SET NULL" onUpdate="NO ACTION"
                                  referencedColumnNames="id" referencedTableName="directus_flows" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="resource" baseTableName="report"
-                                 constraintName="report_resource_foreign" deferrable="false" initiallyDeferred="false"
-                                 onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id"
-                                 referencedTableName="resource" validate="true"/>
         <addForeignKeyConstraint baseColumnNames="course" baseTableName="resource"
                                  constraintName="resource_course_foreign" deferrable="false" initiallyDeferred="false"
                                  onDelete="SET NULL" onUpdate="NO ACTION" referencedColumnNames="id"

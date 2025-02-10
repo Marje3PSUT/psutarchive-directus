@@ -65,6 +65,8 @@ persistent-db: # Create a persistent db for testing purposes.
 		  -v $$VOLUME_NAME:/var/lib/postgresql/data \
 		  postgres:17.2-alpine'
 
-clean: # Delete persistent db data if it exists.
+clean: # Cleanup all resources used.
 	bash -c 'source dev-scripts/config.sh && \
-		docker volume inspect "$$VOLUME_NAME" >/dev/null 2>&1 && docker volume rm "$$VOLUME_NAME" || echo "Volume does not exist."'
+		docker volume inspect "$$VOLUME_NAME" >/dev/null 2>&1 && docker volume rm "$$VOLUME_NAME" || echo "Volume does not exist." && \
+		docker container inspect "$$APP_CONTAINER_NAME" >/dev/null 2>&1 && docker container stop "$$APP_CONTAINER_NAME" || echo "Directus is not running." && \
+		docker container inspect "$$CONTAINER_NAME" >/dev/null 2>&1 && docker container stop "$$CONTAINER_NAME" || echo "Db is not running."'

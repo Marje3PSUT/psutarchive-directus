@@ -65,12 +65,6 @@ INSERT INTO public.directus_collections (collection, icon, note, display_templat
                                          archive_field, archive_app_filter, archive_value, unarchive_value, sort_field,
                                          accountability, color, item_duplication_fields, sort, "group", collapse,
                                          preview_url, versioning)
-VALUES ('report', 'report', NULL, NULL, false, false, NULL, NULL, true, NULL, NULL, NULL, 'all', NULL, NULL, 4, NULL,
-        'open', NULL, false);
-INSERT INTO public.directus_collections (collection, icon, note, display_template, hidden, singleton, translations,
-                                         archive_field, archive_app_filter, archive_value, unarchive_value, sort_field,
-                                         accountability, color, item_duplication_fields, sort, "group", collapse,
-                                         preview_url, versioning)
 VALUES ('exam_data', NULL, NULL, NULL, true, false, NULL, NULL, true, NULL, NULL, NULL, 'all', NULL, NULL, 5, NULL,
         'open', NULL, false);
 INSERT INTO public.directus_collections (collection, icon, note, display_template, hidden, singleton, translations,
@@ -453,18 +447,8 @@ VALUES (74, 'note_data', 'original_author', NULL, 'input', '{"trim":true,"clear"
 INSERT INTO public.directus_fields (id, collection, field, special, interface, options, display, display_options,
                                     readonly, hidden, sort, width, translations, note, conditions, required, "group",
                                     validation, validation_message)
-VALUES (78, 'report', 'id', NULL, 'input', NULL, NULL, NULL, true, true, 1, 'full', NULL, NULL, NULL, false, NULL, NULL,
-        NULL);
-INSERT INTO public.directus_fields (id, collection, field, special, interface, options, display, display_options,
-                                    readonly, hidden, sort, width, translations, note, conditions, required, "group",
-                                    validation, validation_message)
 VALUES (83, 'category', 'color', NULL, 'select-color', '{}', 'color', NULL, false, false, 3, 'full',
         '[{"language":"ar-SA","translation":"اللون"}]', NULL, NULL, true, NULL, NULL, NULL);
-INSERT INTO public.directus_fields (id, collection, field, special, interface, options, display, display_options,
-                                    readonly, hidden, sort, width, translations, note, conditions, required, "group",
-                                    validation, validation_message)
-VALUES (80, 'report', 'complaint', NULL, 'input-multiline', NULL, 'formatted-value', NULL, true, false, 4, 'full',
-        '[{"language":"ar-SA","translation":"الشكوة"}]', NULL, NULL, false, NULL, NULL, NULL);
 INSERT INTO public.directus_fields (id, collection, field, special, interface, options, display, display_options,
                                     readonly, hidden, sort, width, translations, note, conditions, required, "group",
                                     validation, validation_message)
@@ -501,14 +485,6 @@ VALUES (37, 'resource', 'semester', NULL, 'select-dropdown',
 INSERT INTO public.directus_fields (id, collection, field, special, interface, options, display, display_options,
                                     readonly, hidden, sort, width, translations, note, conditions, required, "group",
                                     validation, validation_message)
-VALUES (81, 'report', 'resource', 'm2o', 'select-dropdown-m2o',
-        '{"enableCreate":false,"template":"{{id}}, {{type}}","enableSelect":false}', 'related-values', NULL, false,
-        false, 2, 'full',
-        '[{"language":"en-US","translation":"Resource in Question"},{"language":"ar-SA","translation":"الورقة تحت الشكوة"}]',
-        NULL, NULL, true, NULL, NULL, NULL);
-INSERT INTO public.directus_fields (id, collection, field, special, interface, options, display, display_options,
-                                    readonly, hidden, sort, width, translations, note, conditions, required, "group",
-                                    validation, validation_message)
 VALUES (8, 'course', 'alt_names', 'cast-csv', 'tags', NULL, 'labels', NULL, false, false, 8, 'half',
         '[{"language":"en-US","translation":"Alternative names"},{"language":"ar-SA","translation":"أسماء اخرى"}]',
         '$t:alt_names_hint', NULL, false, NULL, NULL, NULL);
@@ -522,17 +498,6 @@ INSERT INTO public.directus_fields (id, collection, field, special, interface, o
                                     validation, validation_message)
 VALUES (86, 'directus_users', 'total_uploaded_day', NULL, 'input', NULL, NULL, NULL, true, true, 3, 'full', NULL, NULL,
         NULL, false, NULL, NULL, NULL);
-INSERT INTO public.directus_fields (id, collection, field, special, interface, options, display, display_options,
-                                    readonly, hidden, sort, width, translations, note, conditions, required, "group",
-                                    validation, validation_message)
-VALUES (79, 'report', 'type', NULL, 'select-dropdown',
-        '{"choices":[{"text":"$t:unrelated","value":"unrelated"},{"text":"$t:incorrect","value":"incorrect"},{"text":"$t:other","value":"other"}]}',
-        'labels',
-        '{"choices":[{"text":"$t:unrelated","value":"unrelated"},{"text":"$t:incorrect","value":"incorrect"},{"text":"$t:other","value":"other"}]}',
-        true, false, 3, 'full',
-        '[{"language":"en-US","translation":"Report Type"},{"language":"ar-SA","translation":"نوع الشكوى"}]', NULL,
-        NULL, true, NULL, NULL, NULL);
-
 
 ALTER TABLE public.directus_fields ENABLE TRIGGER ALL;
 
@@ -891,12 +856,6 @@ INSERT INTO public.directus_permissions (id, role, collection, action, permissio
 VALUES (247, 'c26ce4ed-9eea-4b1a-9f74-6496c3f105e4', 'directus_files', 'delete',
         '{"_and":[{"associated_resources":{"_nnull":true}}]}', '{}', NULL, '*');
 INSERT INTO public.directus_permissions (id, role, collection, action, permissions, validation, presets, fields)
-VALUES (269, 'c26ce4ed-9eea-4b1a-9f74-6496c3f105e4', 'report', 'read', '{}', '{}', NULL, '*');
-INSERT INTO public.directus_permissions (id, role, collection, action, permissions, validation, presets, fields)
-VALUES (270, 'c26ce4ed-9eea-4b1a-9f74-6496c3f105e4', 'report', 'delete', '{}', '{}', NULL, '*');
-INSERT INTO public.directus_permissions (id, role, collection, action, permissions, validation, presets, fields)
-VALUES (271, NULL, 'report', 'create', '{}', '{}', NULL, '*');
-INSERT INTO public.directus_permissions (id, role, collection, action, permissions, validation, presets, fields)
 VALUES (278, '46ee07b4-b91a-40cd-be4b-94dcd16af0bd', 'directus_panels', 'read', NULL, NULL, NULL, NULL);
 INSERT INTO public.directus_permissions (id, role, collection, action, permissions, validation, presets, fields)
 VALUES (2, NULL, 'category', 'read', '{}', '{}', NULL, '*');
@@ -1010,10 +969,6 @@ VALUES (310, NULL, '801aea5b-0294-4676-afda-951a15072e55', NULL, 'course', NULL,
 INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
                                      layout_options, refresh_interval, filter, icon, color)
 VALUES (311, NULL, '801aea5b-0294-4676-afda-951a15072e55', NULL, 'category', NULL, NULL, '{"tabular":{"page":1}}', NULL,
-        NULL, NULL, 'bookmark', NULL);
-INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
-                                     layout_options, refresh_interval, filter, icon, color)
-VALUES (309, NULL, '801aea5b-0294-4676-afda-951a15072e55', NULL, 'report', NULL, NULL, '{"tabular":{"page":1}}', NULL,
         NULL, NULL, 'bookmark', NULL);
 INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
                                      layout_options, refresh_interval, filter, icon, color)
@@ -1241,10 +1196,6 @@ VALUES (339, NULL, '9f695833-0074-4a08-99ac-834e222bd87e', NULL, 'resource', NUL
         NULL, '{"_and":[{"status":{"_eq":"verified"}}]}', 'bookmark', NULL);
 INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
                                      layout_options, refresh_interval, filter, icon, color)
-VALUES (368, NULL, '0dde93b3-6ee7-4641-a438-85c471b9fde3', NULL, 'report', NULL, NULL, '{"tabular":{"page":1}}', NULL,
-        NULL, NULL, 'bookmark', NULL);
-INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
-                                     layout_options, refresh_interval, filter, icon, color)
 VALUES (363, NULL, '2ef723a5-4637-4236-8e35-dbad734ae1b7', NULL, 'category', NULL, 'tabular',
         '{"tabular":{"limit":25,"fields":["color","name_en","name_ar"],"page":1}}',
         '{"tabular":{"widths":{"color":32,"name_en":180,"name_ar":232}}}', NULL, NULL, 'bookmark', NULL);
@@ -1264,10 +1215,6 @@ INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, sea
 VALUES (346, NULL, 'b3e8856e-87a7-4357-a319-a4b53711399e', NULL, 'category', NULL, 'tabular',
         '{"tabular":{"limit":25,"fields":["color","name_en","name_ar"],"page":1}}',
         '{"tabular":{"widths":{"color":32,"name_en":180,"name_ar":232}}}', NULL, NULL, 'bookmark', NULL);
-INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
-                                     layout_options, refresh_interval, filter, icon, color)
-VALUES (348, NULL, '5eb96f19-c16e-4c20-9823-36d8a9184134', NULL, 'report', NULL, NULL, '{"tabular":{"page":1}}', NULL,
-        NULL, NULL, 'bookmark', NULL);
 INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
                                      layout_options, refresh_interval, filter, icon, color)
 VALUES (342, NULL, 'b3e8856e-87a7-4357-a319-a4b53711399e', NULL, 'resource', NULL, 'tabular',
@@ -1429,10 +1376,6 @@ INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, sea
 VALUES (366, NULL, '752a5372-7427-4daa-9768-b0e4a74dbec0', NULL, 'course', NULL, 'tabular',
         '{"tabular":{"limit":25,"fields":["course_id","name_en","name_ar","category","links","alt_names"],"page":1}}',
         '{"tabular":{"widths":{"course_id":116,"name_en":332,"name_ar":247}}}', NULL, NULL, 'bookmark', NULL);
-INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
-                                     layout_options, refresh_interval, filter, icon, color)
-VALUES (377, NULL, 'f4facb88-fbf6-4f23-91a1-2b389059ca94', NULL, 'report', NULL, NULL, '{"tabular":{"page":1}}', NULL,
-        NULL, NULL, 'bookmark', NULL);
 INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
                                      layout_options, refresh_interval, filter, icon, color)
 VALUES (389, NULL, 'f4facb88-fbf6-4f23-91a1-2b389059ca94', NULL, 'directus_activity', NULL, 'tabular',
@@ -1607,10 +1550,6 @@ VALUES (435, NULL, '2a588b10-a573-4a4f-9981-c4b3dadd2f32', NULL, 'resource', NUL
         '{"tabular":{"limit":25,"fields":["status","id","course","type","year","semester","date_updated","files","user_updated","user_created"],"page":1}}',
         '{"tabular":{"widths":{"status":32,"id":96,"course":347,"type":100,"year":95,"semester":116,"files":101}}}',
         NULL, '{"_and":[{"status":{"_eq":"verified"}}]}', 'bookmark', NULL);
-INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
-                                     layout_options, refresh_interval, filter, icon, color)
-VALUES (424, NULL, '752a5372-7427-4daa-9768-b0e4a74dbec0', NULL, 'report', NULL, NULL, '{"tabular":{"page":1}}', NULL,
-        NULL, NULL, 'bookmark', NULL);
 INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
                                      layout_options, refresh_interval, filter, icon, color)
 VALUES (425, NULL, '58612de4-713f-443f-b28e-44006bf2053b', NULL, 'resource', NULL, 'tabular',
@@ -1870,10 +1809,6 @@ VALUES (555, NULL, 'cd21983e-0dd8-4994-99da-76fdc9add615', NULL, 'course', 'obj'
         '{"tabular":{"widths":{"course_id":116,"name_en":332,"name_ar":247}}}', NULL, NULL, 'bookmark', NULL);
 INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
                                      layout_options, refresh_interval, filter, icon, color)
-VALUES (467, NULL, 'b7eb79c3-7e3a-41b3-92d6-9f9f83f1c0e5', NULL, 'report', NULL, NULL, '{"tabular":{"page":1}}', NULL,
-        NULL, NULL, 'bookmark', NULL);
-INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
-                                     layout_options, refresh_interval, filter, icon, color)
 VALUES (478, NULL, 'd93ca4f9-7668-4b29-982e-c88af02c0bbb', NULL, 'resource', NULL, 'tabular',
         '{"tabular":{"limit":25,"fields":["status","id","course","type","year","semester","date_updated","files","user_updated","user_created"],"page":1}}',
         '{"tabular":{"widths":{"status":32,"id":96,"course":347,"type":100,"year":95,"semester":116,"files":101}}}',
@@ -1894,10 +1829,6 @@ INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, sea
 VALUES (480, NULL, 'f6754d5d-8444-4c50-8fb5-1552b9a3979b', NULL, 'directus_users', NULL, 'cards',
         '{"cards":{"sort":["email"],"page":1}}',
         '{"cards":{"icon":"account_circle","title":"{{ first_name }} {{ last_name }}","subtitle":"{{ email }}","size":4}}',
-        NULL, NULL, 'bookmark', NULL);
-INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
-                                     layout_options, refresh_interval, filter, icon, color)
-VALUES (482, NULL, 'f6754d5d-8444-4c50-8fb5-1552b9a3979b', NULL, 'report', NULL, NULL, '{"tabular":{"page":1}}', NULL,
         NULL, NULL, 'bookmark', NULL);
 INSERT INTO public.directus_presets (id, bookmark, "user", role, collection, search, layout, layout_query,
                                      layout_options, refresh_interval, filter, icon, color)
@@ -2570,9 +2501,6 @@ VALUES (9, 'resource_files', 'directus_files_id', 'directus_files', 'associated_
 INSERT INTO public.directus_relations (id, many_collection, many_field, one_collection, one_field, one_collection_field,
                                        one_allowed_collections, junction_field, sort_field, one_deselect_action)
 VALUES (10, 'resource_files', 'resource_id', 'resource', 'files', NULL, NULL, 'directus_files_id', 'sort', 'delete');
-INSERT INTO public.directus_relations (id, many_collection, many_field, one_collection, one_field, one_collection_field,
-                                       one_allowed_collections, junction_field, sort_field, one_deselect_action)
-VALUES (15, 'report', 'resource', 'resource', NULL, NULL, NULL, NULL, NULL, 'nullify');
 INSERT INTO public.directus_relations (id, many_collection, many_field, one_collection, one_field, one_collection_field,
                                        one_allowed_collections, junction_field, sort_field, one_deselect_action)
 VALUES (4, 'resource', 'course', 'course', 'resource', NULL, NULL, NULL, NULL, 'nullify');

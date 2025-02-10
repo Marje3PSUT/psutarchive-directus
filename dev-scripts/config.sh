@@ -26,7 +26,7 @@ DATABASE_PASSWORD="pass123"
 DATABASE_NAME="directus"
 
 PROJECT_ROOT=$( cd -- "$( dirname -- "$( dirname -- "${BASH_SOURCE[0]}" )" )" &> /dev/null && pwd)/
-TMP_DIR="${PROJECT_ROOT}/.tmp/"
+TMP_DIR="${PROJECT_ROOT}.tmp/"
 
 DUMP_BEFORE="data-before.sql"
 DUMP_AFTER="data-after.sql"
