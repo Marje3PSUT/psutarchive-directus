@@ -24,6 +24,7 @@ if [ -n "$OLD_CHANGESETS" ]; then
 fi
 
 SNAPSHOT_FILE="./tmp/$(ls $TMP_DIR/ | grep snapshot)"
+AUTHOR=$(git config user.name | sed 's/ /_/g')
 echo "Generating a changeset reflecting changes since the last diff..."
 run_liquibase "${PROJECT_ROOT}"liquibase/changelogs $TMP_DIR "liquibase diffChangeLog \
     --url offline:postgresql?snapshot=${SNAPSHOT_FILE} \
@@ -31,14 +32,14 @@ run_liquibase "${PROJECT_ROOT}"liquibase/changelogs $TMP_DIR "liquibase diffChan
     --referenceUrl $DATABASE_URL \
     --referenceUsername $DATABASE_USER \
     --referencePassword $DATABASE_PASSWORD \
-    --author=$(git config user.name)"
+    --author=$AUTHOR"
 run_liquibase "${PROJECT_ROOT}"liquibase/changelogs $TMP_DIR "liquibase diffChangeLog \
     --referenceURL offline:postgresql?snapshot=${SNAPSHOT_FILE} \
     --changeLogFile tmp/$DOWN_CHANGELOG \
     --url $DATABASE_URL \
     --username $DATABASE_USER \
     --password $DATABASE_PASSWORD \
-    --author=$(git config user.name)"
+    --author=$AUTHOR"
 
 
 echo "Dumping the database from Docker container $CONTAINER_NAME..."
@@ -57,7 +58,7 @@ cat <<EOF > "$FINAL_CHANGELOG_PATH"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.31.xsd">
 
-    <changeSet id="$1" author="$(git config user.name)">
+    <changeSet id="$1" author="$AUTHOR">
       $up_contents
       <sqlFile path="$DUMP_AFTER" relativeToChangelogFile="true"/>
 
@@ -66,7 +67,7 @@ cat <<EOF > "$FINAL_CHANGELOG_PATH"
           <sqlFile path="$DUMP_BEFORE" relativeToChangelogFile="true"/>
       </rollback>
     </changeSet>
-    <changeSet id="$1-1" author="$(git config user.name)">
+    <changeSet id="$1-1" author="$AUTHOR">
       <tagDatabase tag="$1"/>
     </changeSet>
 </databaseChangeLog>
