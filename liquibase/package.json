@@ -1,0 +1,11 @@
+{
+  "name": "liquibase",
+  "scripts": {
+    "format": "prettier --write changelogs/"
+  },
+  "devDependencies": {
+    "@prettier/plugin-xml": "^3.4.1",
+    "prettier": "3.5.2",
+    "prettier-plugin-sql": "^0.18.1"
+  }
+}

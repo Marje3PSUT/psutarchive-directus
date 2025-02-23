@@ -1,0 +1,107 @@
+{
+	"name": "psutarchive-essentials",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"directus:extension": {
+		"host": "^10.1.14",
+		"type": "bundle",
+		"path": {
+			"app": "dist/app.mjs",
+			"api": "dist/api.mjs"
+		},
+		"entries": [
+			{
+				"type": "hook",
+				"name": "directus-extension-startup-essentials",
+				"source": "src/startup-essentials/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-delete-orphan-entities",
+				"source": "src/delete-orphan-entities/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-delete-unused-files",
+				"source": "src/delete-unused-files/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-module-permissions",
+				"source": "src/module-permissions/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-slug",
+				"source": "src/slug/index.ts"
+			},
+			{
+				"type": "module",
+				"name": "directus-extension-tutorial-module",
+				"source": "src/tutorial-module/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-year-validation",
+				"source": "src/year-validation/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-limit-resources",
+				"source": "src/limit-resources/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-prevent-duplicate-exams",
+				"source": "src/prevent-duplicate-exams/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-limit-total-upload",
+				"source": "src/limit-total-upload/index.ts"
+			},
+			{
+				"type": "hook",
+				"name": "directus-extension-show-note-data",
+				"source": "src/show-note-data/index.ts"
+			}
+		]
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "directus-extension build",
+		"dev": "directus-extension build -w --no-minify",
+		"format": "prettier --write src/**/*.{ts,vue,js}",
+		"lint": "eslint . --config eslint.config.js"
+	},
+	"devDependencies": {
+		"@directus/types": "^11.0.6",
+		"@eslint/js": "^9.21.0",
+		"@intlify/unplugin-vue-i18n": "^2.0.0",
+		"@types/lodash": "^4.14.202",
+		"@types/pino": "^7.0.5",
+		"@typescript-eslint/eslint-plugin": "6.7.3",
+		"@typescript-eslint/parser": "6.7.3",
+		"@vitejs/plugin-vue": "^5.0.4",
+		"eslint": "^8.57.1",
+		"eslint-config-prettier": "^10.0.1",
+		"eslint-plugin-vue": "^9.32.0",
+		"globals": "^16.0.0",
+		"prettier": "2.8.8",
+		"typescript-eslint": "^8.24.1",
+		"vue": "^3.4.21",
+		"vue-i18n": "^9.9.1"
+	},
+	"dependencies": {
+		"@directus/errors": "0.2.3",
+		"@directus/extensions-sdk": "10.3.4",
+		"@sindresorhus/slugify": "^2.2.1",
+		"@types/mime-types": "^2.1.4",
+		"lodash": "^4.17.21",
+		"mime-types": "^2.1.35",
+		"yaml": "^2.7.0"
+	}
+}

@@ -1,21 +1,31 @@
-# psutarchive-directus
+# PSUTArchive Directus
 
-This repository houses the [directus-schema-sync](https://github.com/bcc-code/directus-schema-sync) configuration for our directus backend.
+Directus backend for PSUTArchive. Frontend can be found [here](https://github.com/Marje3PSUT/psutarchive).
 
-## Initial Install
-1- Create a new file called `.env` using `.example.env`
+## Requirements
 
-2- Run directus.\
-`docker compose up`
+- `build-essential`
+- Node.js, npm (LTS recommended)
+- Docker
 
-3- Run this to install schema-sync to directus.\
-`docker exec -it psutarchive-dev-directus npx directus schema-sync install`.
+## Getting Started
 
-4- Get the admin role UUID and [create an admin user]((https://docs.directus.io/self-hosted/cli.html#creating-users)). Example:\
-`docker exec -it psutarchive-dev-directus npx directus users create --email test@email.com --password Password123@ --role c9e50c86-d0f3-462a-850d-8872ea49fa09`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Marje3PSUT/psutarchive-directus.git
+   cd psutarchive-directus
+   ```
+2. Review the environment variables `dev-scripts/config.sh`
 
-## Commands
+Review the [DEVELOPMENT.md](DEVELOPMENT.md) document for guides and FAQs.
 
-Export: `docker exec -it psutarchive-dev-directus npx directus schema-sync import`
+## Contributing
 
-Import: `docker exec -it psutarchive-dev-directus npx directus schema-sync export`
+See our [contribution guidelines](https://github.com/Marje3PSUT/.github/blob/main/CONTRIBUTING.md) and pick an
+issue [here](https://github.com/orgs/Marje3PSUT/projects/1).
+
+## Documentation
+
+- https://en.wikipedia.org/wiki/Schema_migration
+- https://docs.liquibase.com
+- https://docs.directus.io/
