@@ -4,22 +4,23 @@
 // files module.
 //
 
-import { defineHook } from '@directus/extensions-sdk';
+import { defineHook } from "@directus/extensions-sdk";
+import type { Settings } from "@directus/types";
 
 export default defineHook(({ filter }) => {
-	filter('settings.read', async (items: any, meta, { accountability }) => {
-		if (accountability && !accountability.admin) {
-			const settings: any = items[0];
-
-			settings.module_bar = items[0].module_bar.map((module: any) => {
-				if (module.id === 'files') {
-					module.enabled = false;
-				}
-
-				return module;
-			});
-		}
-
-		return items;
-	});
+  filter(
+    "settings.read",
+    async (items: Settings[], _meta, { accountability }) => {
+      if (accountability && !accountability.admin) {
+        const settings = items[0]!;
+        settings.module_bar = settings.module_bar.map((module) => {
+          if (module.id === "files") {
+            module.enabled = false;
+          }
+          return module;
+        });
+      }
+      return items;
+    }
+  );
 });

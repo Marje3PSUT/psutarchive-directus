@@ -1,14 +1,20 @@
+# Reference
+# https://docs.directus.io/reference/system/settings.html
+#
+# project_logo, public_foreground, public_background and public_favicon can be either set to null or
+# an asset UUID.
 settings:
   project_name: "PSUTArchive Development"
   default_language: "en-US"
   project_color: "#AA4A44"
-  project_logo: null
+  project_logo: "91ff7034-ca4d-4cc5-8816-28421d082be0"
   project_url: null
   project_descriptor: null
-  public_note: null
   custom_css: null
   public_foreground: null
   public_background: null
+  public_note: null
+  public_favicon: null
   auth_login_attempts: 5
   auth_password_policy: null
   storage_asset_transform: null

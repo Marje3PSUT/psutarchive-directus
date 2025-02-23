@@ -7,20 +7,24 @@ help:
 .PHONY: app
 app: # Runs an instance of the backend (env in the config.sh)
 	bash -c 'source dev-scripts/config.sh && \
-		docker build -t psutarchive-directus:latest . && \
-		docker run --rm --name $$APP_CONTAINER_NAME \
+	  mkdir -p $$TMP_DIR/uploads && \
+	  docker build -t psutarchive-directus:latest . && \
+	  docker run --rm --name $$APP_CONTAINER_NAME \
 		--network host \
 		--env-file <(env) \
-		-v ./configs:/configs \
+		-v ./startup-files/configs:/configs \
+		-v $$UPLOADS_DIR:/directus/uploads \
 		psutarchive-directus:latest'
 
 app-dev: # Runs an instance of the backend *with extension hot-reloads* (env in the config.sh)\n
 	bash -c 'source dev-scripts/config.sh && \
+	  mkdir -p $$TMP_DIR/uploads && \
 		docker build -t psutarchive-directus:latest . && \
 		docker run --rm --name $$APP_CONTAINER_NAME \
 		--network host \
 		--env-file <(env) \
-		-v ./configs:/configs \
+		-v ./startup-files/configs:/configs \
+		-v $$UPLOADS_DIR:/directus/uploads \
 		-v ./extensions:/directus/extensions/psutarchive-essentials \
 		psutarchive-directus:latest'
 
@@ -68,5 +72,5 @@ persistent-db: # Create a persistent db for testing purposes.
 clean: # Cleanup all resources used.
 	bash -c 'source dev-scripts/config.sh && \
 		docker volume inspect "$$VOLUME_NAME" >/dev/null 2>&1 && docker volume rm "$$VOLUME_NAME" || echo "Volume does not exist." && \
-		docker container inspect "$$APP_CONTAINER_NAME" >/dev/null 2>&1 && docker container stop "$$APP_CONTAINER_NAME" || echo "Directus is not running." && \
-		docker container inspect "$$CONTAINER_NAME" >/dev/null 2>&1 && docker container stop "$$CONTAINER_NAME" || echo "Db is not running."'
+		docker container inspect "$$APP_CONTAINER_NAME" >/dev/null 2>&1 && docker container stop "$$APP_CONTAINER_NAME" || docker container rm "$$APP_CONTAINER_NAME"|| echo "Directus is not running." && \
+		docker container inspect "$$CONTAINER_NAME" >/dev/null 2>&1 && docker container stop "$$CONTAINER_NAME" || docker container rm "$$CONTAINER_NAME"|| echo "Db is not running."'

@@ -28,7 +28,13 @@
    ./dev-scripts/generate-changelog.sh XYZ
    ```
 5. Manually review generated files in `.tmp/` and move to `liquibase/changelogs/XYZ/`
-6. Test your changeset with a workflow similar to this:
+6. Run the following to format all changelogs deterministically:
+   ```bash
+   cd liquibase
+   npm install             # first time only
+   npm run format
+   ```
+7. Test your changeset with a workflow similar to this:
    ```bash
    # After shutting down db and directus
    make clean

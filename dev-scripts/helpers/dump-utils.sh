@@ -53,5 +53,5 @@ generate_table_params() {
 
 create_tmp() {
   local tmp_dir=$1
-  mkdir -p $tmp_dir
+  mkdir -p ./$tmp_dir/uploads
 }

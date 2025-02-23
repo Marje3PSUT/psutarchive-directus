@@ -28,6 +28,8 @@ DATABASE_NAME="directus"
 PROJECT_ROOT=$( cd -- "$( dirname -- "$( dirname -- "${BASH_SOURCE[0]}" )" )" &> /dev/null && pwd)/
 TMP_DIR="${PROJECT_ROOT}.tmp/"
 
+UPLOADS_DIR="${TMP_DIR}uploads/"
+
 DUMP_BEFORE="data-before.sql"
 DUMP_AFTER="data-after.sql"
 UP_CHANGELOG="up-changelog.xml"
@@ -58,10 +60,13 @@ export MODERATOR_EMAIL="moderator@email.com"
 export MODERATOR_PASSWORD="123"
 
 export WEBSOCKETS_ENABLED="true"
+export EXTENSIONS_AUTO_RELOAD="true"
 export CACHE_ENABLED="true"
 export CACHE_STORE="database"
+export STORAGE_LOCATIONS="local"
 export STORAGE_LOCAL_ROOT="./uploads"
 export AUTH_PROVIDERS="local"
+export ASSETS_PATH="/assets"
 export SETTINGS_FILE_PATH="/configs/settings.yaml"
 export TRANSLATIONS_PATH="/translations"
 export CONTENT_SECURITY_POLICY_DIRECTIVES__CHILD_SRC="array:'self',blob:,https://*"

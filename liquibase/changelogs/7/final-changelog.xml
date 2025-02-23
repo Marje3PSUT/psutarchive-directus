@@ -1,851 +1,1775 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.31.xsd">
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.31.xsd"
+>
 
     <changeSet id="7" author="HDDTHR">
-        <createTable tableName="announcement">
+              <createTable tableName="announcement">
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="announcement_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="announcement_pkey"
+        />
             </column>
-            <column name="title_en" type="VARCHAR(255)"/>
-            <column defaultValue="NULL" name="title_ar" type="VARCHAR(255)"/>
-            <column defaultValue="NULL" name="description_en" type="VARCHAR(255)"/>
-            <column defaultValue="NULL" name="description_ar" type="VARCHAR(255)"/>
-            <column defaultValue="NULL" name="url" type="VARCHAR(255)"/>
-            <column name="icon" type="VARCHAR(255)"/>
+            <column name="title_en" type="VARCHAR(255)" />
+            <column defaultValue="NULL" name="title_ar" type="VARCHAR(255)" />
+            <column
+        defaultValue="NULL"
+        name="description_en"
+        type="VARCHAR(255)"
+      />
+            <column
+        defaultValue="NULL"
+        name="description_ar"
+        type="VARCHAR(255)"
+      />
+            <column defaultValue="NULL" name="url" type="VARCHAR(255)" />
+            <column name="icon" type="VARCHAR(255)" />
         </createTable>
         <createTable tableName="course">
-            <column name="alt_names" type="TEXT"/>
-            <column defaultValue="NULL" name="course_id" type="VARCHAR(255)"/>
+            <column name="alt_names" type="TEXT" />
+            <column defaultValue="NULL" name="course_id" type="VARCHAR(255)" />
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="course_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="course_pkey"
+        />
             </column>
-            <column name="links" type="JSON"/>
-            <column defaultValue="NULL" name="name_ar" type="VARCHAR(255)"/>
-            <column defaultValue="NULL" name="name_en" type="VARCHAR(255)"/>
-            <column name="additional_notes" type="VARCHAR(255)"/>
+            <column name="links" type="JSON" />
+            <column defaultValue="NULL" name="name_ar" type="VARCHAR(255)" />
+            <column defaultValue="NULL" name="name_en" type="VARCHAR(255)" />
+            <column name="additional_notes" type="VARCHAR(255)" />
         </createTable>
         <createTable tableName="directus_activity">
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_activity_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_activity_pkey"
+        />
             </column>
             <column name="action" type="VARCHAR(45)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="user" type="UUID"/>
-            <column defaultValueComputed="now()" name="timestamp" type="TIMESTAMP WITH TIME ZONE">
-                <constraints nullable="false"/>
+            <column name="user" type="UUID" />
+            <column
+        defaultValueComputed="now()"
+        name="timestamp"
+        type="TIMESTAMP WITH TIME ZONE"
+      >
+                <constraints nullable="false" />
             </column>
-            <column name="ip" type="VARCHAR(50)"/>
-            <column name="user_agent" type="TEXT"/>
+            <column name="ip" type="VARCHAR(50)" />
+            <column name="user_agent" type="TEXT" />
             <column name="collection" type="VARCHAR(64)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="item" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="comment" type="TEXT"/>
-            <column name="origin" type="VARCHAR(255)"/>
+            <column name="comment" type="TEXT" />
+            <column name="origin" type="VARCHAR(255)" />
         </createTable>
         <createTable tableName="directus_collections">
             <column name="collection" type="VARCHAR(64)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_collections_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_collections_pkey"
+        />
             </column>
-            <column name="icon" type="VARCHAR(30)"/>
-            <column name="note" type="TEXT"/>
-            <column name="display_template" type="VARCHAR(255)"/>
+            <column name="icon" type="VARCHAR(30)" />
+            <column name="note" type="TEXT" />
+            <column name="display_template" type="VARCHAR(255)" />
             <column defaultValueBoolean="false" name="hidden" type="BOOLEAN">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column defaultValueBoolean="false" name="singleton" type="BOOLEAN">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="translations" type="JSON"/>
-            <column name="archive_field" type="VARCHAR(64)"/>
-            <column defaultValueBoolean="true" name="archive_app_filter" type="BOOLEAN">
-                <constraints nullable="false"/>
+            <column name="translations" type="JSON" />
+            <column name="archive_field" type="VARCHAR(64)" />
+            <column
+        defaultValueBoolean="true"
+        name="archive_app_filter"
+        type="BOOLEAN"
+      >
+                <constraints nullable="false" />
             </column>
-            <column name="archive_value" type="VARCHAR(255)"/>
-            <column name="unarchive_value" type="VARCHAR(255)"/>
-            <column name="sort_field" type="VARCHAR(64)"/>
-            <column defaultValue="all" name="accountability" type="VARCHAR(255)"/>
-            <column name="color" type="VARCHAR(255)"/>
-            <column name="item_duplication_fields" type="JSON"/>
-            <column name="sort" type="INTEGER"/>
-            <column name="group" type="VARCHAR(64)"/>
+            <column name="archive_value" type="VARCHAR(255)" />
+            <column name="unarchive_value" type="VARCHAR(255)" />
+            <column name="sort_field" type="VARCHAR(64)" />
+            <column
+        defaultValue="all"
+        name="accountability"
+        type="VARCHAR(255)"
+      />
+            <column name="color" type="VARCHAR(255)" />
+            <column name="item_duplication_fields" type="JSON" />
+            <column name="sort" type="INTEGER" />
+            <column name="group" type="VARCHAR(64)" />
             <column defaultValue="open" name="collapse" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="preview_url" type="VARCHAR(255)"/>
-            <column defaultValueBoolean="false" name="versioning" type="BOOLEAN">
-                <constraints nullable="false"/>
+            <column name="preview_url" type="VARCHAR(255)" />
+            <column
+        defaultValueBoolean="false"
+        name="versioning"
+        type="BOOLEAN"
+      >
+                <constraints nullable="false" />
             </column>
         </createTable>
         <createTable tableName="directus_dashboards">
             <column name="id" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_dashboards_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_dashboards_pkey"
+        />
             </column>
             <column name="name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column defaultValue="dashboard" name="icon" type="VARCHAR(30)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="note" type="TEXT"/>
-            <column defaultValueComputed="now()" name="date_created" type="TIMESTAMP WITH TIME ZONE"/>
-            <column name="user_created" type="UUID"/>
-            <column name="color" type="VARCHAR(255)"/>
+            <column name="note" type="TEXT" />
+            <column
+        defaultValueComputed="now()"
+        name="date_created"
+        type="TIMESTAMP WITH TIME ZONE"
+      />
+            <column name="user_created" type="UUID" />
+            <column name="color" type="VARCHAR(255)" />
         </createTable>
         <createTable tableName="directus_extensions">
             <column defaultValueBoolean="true" name="enabled" type="BOOLEAN">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="id" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_extensions_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_extensions_pkey"
+        />
             </column>
             <column name="folder" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="source" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="bundle" type="UUID"/>
+            <column name="bundle" type="UUID" />
         </createTable>
         <createTable tableName="directus_fields">
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_fields_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_fields_pkey"
+        />
             </column>
             <column name="collection" type="VARCHAR(64)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="field" type="VARCHAR(64)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="special" type="VARCHAR(64)"/>
-            <column name="interface" type="VARCHAR(64)"/>
-            <column name="options" type="JSON"/>
-            <column name="display" type="VARCHAR(64)"/>
-            <column name="display_options" type="JSON"/>
+            <column name="special" type="VARCHAR(64)" />
+            <column name="interface" type="VARCHAR(64)" />
+            <column name="options" type="JSON" />
+            <column name="display" type="VARCHAR(64)" />
+            <column name="display_options" type="JSON" />
             <column defaultValueBoolean="false" name="readonly" type="BOOLEAN">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column defaultValueBoolean="false" name="hidden" type="BOOLEAN">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="sort" type="INTEGER"/>
-            <column defaultValue="full" name="width" type="VARCHAR(30)"/>
-            <column name="translations" type="JSON"/>
-            <column name="note" type="TEXT"/>
-            <column name="conditions" type="JSON"/>
-            <column defaultValueBoolean="false" name="required" type="BOOLEAN"/>
-            <column name="group" type="VARCHAR(64)"/>
-            <column name="validation" type="JSON"/>
-            <column name="validation_message" type="TEXT"/>
+            <column name="sort" type="INTEGER" />
+            <column defaultValue="full" name="width" type="VARCHAR(30)" />
+            <column name="translations" type="JSON" />
+            <column name="note" type="TEXT" />
+            <column name="conditions" type="JSON" />
+            <column
+        defaultValueBoolean="false"
+        name="required"
+        type="BOOLEAN"
+      />
+            <column name="group" type="VARCHAR(64)" />
+            <column name="validation" type="JSON" />
+            <column name="validation_message" type="TEXT" />
         </createTable>
         <createTable tableName="directus_files">
             <column name="id" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_files_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_files_pkey"
+        />
             </column>
             <column name="storage" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="filename_disk" type="VARCHAR(255)"/>
+            <column name="filename_disk" type="VARCHAR(255)" />
             <column name="filename_download" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="title" type="VARCHAR(255)"/>
-            <column name="type" type="VARCHAR(255)"/>
-            <column name="folder" type="UUID"/>
-            <column name="uploaded_by" type="UUID"/>
-            <column defaultValueComputed="now()" name="uploaded_on" type="TIMESTAMP WITH TIME ZONE">
-                <constraints nullable="false"/>
+            <column name="title" type="VARCHAR(255)" />
+            <column name="type" type="VARCHAR(255)" />
+            <column name="folder" type="UUID" />
+            <column name="uploaded_by" type="UUID" />
+            <column
+        defaultValueComputed="now()"
+        name="uploaded_on"
+        type="TIMESTAMP WITH TIME ZONE"
+      >
+                <constraints nullable="false" />
             </column>
-            <column name="modified_by" type="UUID"/>
-            <column defaultValueComputed="now()" name="modified_on" type="TIMESTAMP WITH TIME ZONE">
-                <constraints nullable="false"/>
+            <column name="modified_by" type="UUID" />
+            <column
+        defaultValueComputed="now()"
+        name="modified_on"
+        type="TIMESTAMP WITH TIME ZONE"
+      >
+                <constraints nullable="false" />
             </column>
-            <column name="charset" type="VARCHAR(50)"/>
-            <column name="filesize" type="BIGINT"/>
-            <column name="width" type="INTEGER"/>
-            <column name="height" type="INTEGER"/>
-            <column name="duration" type="INTEGER"/>
-            <column name="embed" type="VARCHAR(200)"/>
-            <column name="description" type="TEXT"/>
-            <column name="location" type="TEXT"/>
-            <column name="tags" type="TEXT"/>
-            <column name="metadata" type="JSON"/>
-            <column name="focal_point_x" type="INTEGER"/>
-            <column name="focal_point_y" type="INTEGER"/>
+            <column name="charset" type="VARCHAR(50)" />
+            <column name="filesize" type="BIGINT" />
+            <column name="width" type="INTEGER" />
+            <column name="height" type="INTEGER" />
+            <column name="duration" type="INTEGER" />
+            <column name="embed" type="VARCHAR(200)" />
+            <column name="description" type="TEXT" />
+            <column name="location" type="TEXT" />
+            <column name="tags" type="TEXT" />
+            <column name="metadata" type="JSON" />
+            <column name="focal_point_x" type="INTEGER" />
+            <column name="focal_point_y" type="INTEGER" />
         </createTable>
         <createTable tableName="directus_flows">
             <column name="id" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_flows_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_flows_pkey"
+        />
             </column>
             <column name="name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="icon" type="VARCHAR(30)"/>
-            <column name="color" type="VARCHAR(255)"/>
-            <column name="description" type="TEXT"/>
+            <column name="icon" type="VARCHAR(30)" />
+            <column name="color" type="VARCHAR(255)" />
+            <column name="description" type="TEXT" />
             <column defaultValue="active" name="status" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="trigger" type="VARCHAR(255)"/>
-            <column defaultValue="all" name="accountability" type="VARCHAR(255)"/>
-            <column name="options" type="JSON"/>
-            <column name="operation" type="UUID"/>
-            <column defaultValueComputed="now()" name="date_created" type="TIMESTAMP WITH TIME ZONE"/>
-            <column name="user_created" type="UUID"/>
+            <column name="trigger" type="VARCHAR(255)" />
+            <column
+        defaultValue="all"
+        name="accountability"
+        type="VARCHAR(255)"
+      />
+            <column name="options" type="JSON" />
+            <column name="operation" type="UUID" />
+            <column
+        defaultValueComputed="now()"
+        name="date_created"
+        type="TIMESTAMP WITH TIME ZONE"
+      />
+            <column name="user_created" type="UUID" />
         </createTable>
         <createTable tableName="directus_migrations">
             <column name="version" type="VARCHAR(255)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_migrations_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_migrations_pkey"
+        />
             </column>
             <column name="name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column defaultValueComputed="now()" name="timestamp" type="TIMESTAMP WITH TIME ZONE"/>
+            <column
+        defaultValueComputed="now()"
+        name="timestamp"
+        type="TIMESTAMP WITH TIME ZONE"
+      />
         </createTable>
         <createTable tableName="directus_notifications">
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_notifications_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_notifications_pkey"
+        />
             </column>
-            <column defaultValueComputed="now()" name="timestamp" type="TIMESTAMP WITH TIME ZONE"/>
-            <column defaultValue="inbox" name="status" type="VARCHAR(255)"/>
+            <column
+        defaultValueComputed="now()"
+        name="timestamp"
+        type="TIMESTAMP WITH TIME ZONE"
+      />
+            <column defaultValue="inbox" name="status" type="VARCHAR(255)" />
             <column name="recipient" type="UUID">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="sender" type="UUID"/>
+            <column name="sender" type="UUID" />
             <column name="subject" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="message" type="TEXT"/>
-            <column name="collection" type="VARCHAR(64)"/>
-            <column name="item" type="VARCHAR(255)"/>
+            <column name="message" type="TEXT" />
+            <column name="collection" type="VARCHAR(64)" />
+            <column name="item" type="VARCHAR(255)" />
         </createTable>
         <createTable tableName="directus_operations">
             <column name="id" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_operations_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_operations_pkey"
+        />
             </column>
-            <column name="name" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)" />
             <column name="key" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="type" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="position_x" type="INTEGER">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="position_y" type="INTEGER">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="options" type="JSON"/>
-            <column name="resolve" type="UUID"/>
-            <column name="reject" type="UUID"/>
+            <column name="options" type="JSON" />
+            <column name="resolve" type="UUID" />
+            <column name="reject" type="UUID" />
             <column name="flow" type="UUID">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column defaultValueComputed="now()" name="date_created" type="TIMESTAMP WITH TIME ZONE"/>
-            <column name="user_created" type="UUID"/>
+            <column
+        defaultValueComputed="now()"
+        name="date_created"
+        type="TIMESTAMP WITH TIME ZONE"
+      />
+            <column name="user_created" type="UUID" />
         </createTable>
         <createTable tableName="directus_panels">
             <column name="id" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_panels_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_panels_pkey"
+        />
             </column>
             <column name="dashboard" type="UUID">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="name" type="VARCHAR(255)"/>
-            <column defaultValue="NULL" name="icon" type="VARCHAR(30)"/>
-            <column name="color" type="VARCHAR(10)"/>
-            <column defaultValueBoolean="false" name="show_header" type="BOOLEAN">
-                <constraints nullable="false"/>
+            <column name="name" type="VARCHAR(255)" />
+            <column defaultValue="NULL" name="icon" type="VARCHAR(30)" />
+            <column name="color" type="VARCHAR(10)" />
+            <column
+        defaultValueBoolean="false"
+        name="show_header"
+        type="BOOLEAN"
+      >
+                <constraints nullable="false" />
             </column>
-            <column name="note" type="TEXT"/>
+            <column name="note" type="TEXT" />
             <column name="type" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="position_x" type="INTEGER">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="position_y" type="INTEGER">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="width" type="INTEGER">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="height" type="INTEGER">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="options" type="JSON"/>
-            <column defaultValueComputed="now()" name="date_created" type="TIMESTAMP WITH TIME ZONE"/>
-            <column name="user_created" type="UUID"/>
+            <column name="options" type="JSON" />
+            <column
+        defaultValueComputed="now()"
+        name="date_created"
+        type="TIMESTAMP WITH TIME ZONE"
+      />
+            <column name="user_created" type="UUID" />
         </createTable>
         <createTable tableName="directus_presets">
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_presets_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_presets_pkey"
+        />
             </column>
-            <column name="bookmark" type="VARCHAR(255)"/>
-            <column name="user" type="UUID"/>
-            <column name="role" type="UUID"/>
-            <column name="collection" type="VARCHAR(64)"/>
-            <column name="search" type="VARCHAR(100)"/>
-            <column defaultValue="tabular" name="layout" type="VARCHAR(100)"/>
-            <column name="layout_query" type="JSON"/>
-            <column name="layout_options" type="JSON"/>
-            <column name="refresh_interval" type="INTEGER"/>
-            <column name="filter" type="JSON"/>
-            <column defaultValue="bookmark" name="icon" type="VARCHAR(30)"/>
-            <column name="color" type="VARCHAR(255)"/>
+            <column name="bookmark" type="VARCHAR(255)" />
+            <column name="user" type="UUID" />
+            <column name="role" type="UUID" />
+            <column name="collection" type="VARCHAR(64)" />
+            <column name="search" type="VARCHAR(100)" />
+            <column defaultValue="tabular" name="layout" type="VARCHAR(100)" />
+            <column name="layout_query" type="JSON" />
+            <column name="layout_options" type="JSON" />
+            <column name="refresh_interval" type="INTEGER" />
+            <column name="filter" type="JSON" />
+            <column defaultValue="bookmark" name="icon" type="VARCHAR(30)" />
+            <column name="color" type="VARCHAR(255)" />
         </createTable>
         <createTable tableName="directus_relations">
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_relations_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_relations_pkey"
+        />
             </column>
             <column name="many_collection" type="VARCHAR(64)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="many_field" type="VARCHAR(64)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="one_collection" type="VARCHAR(64)"/>
-            <column name="one_field" type="VARCHAR(64)"/>
-            <column name="one_collection_field" type="VARCHAR(64)"/>
-            <column name="one_allowed_collections" type="TEXT"/>
-            <column name="junction_field" type="VARCHAR(64)"/>
-            <column name="sort_field" type="VARCHAR(64)"/>
-            <column defaultValue="nullify" name="one_deselect_action" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+            <column name="one_collection" type="VARCHAR(64)" />
+            <column name="one_field" type="VARCHAR(64)" />
+            <column name="one_collection_field" type="VARCHAR(64)" />
+            <column name="one_allowed_collections" type="TEXT" />
+            <column name="junction_field" type="VARCHAR(64)" />
+            <column name="sort_field" type="VARCHAR(64)" />
+            <column
+        defaultValue="nullify"
+        name="one_deselect_action"
+        type="VARCHAR(255)"
+      >
+                <constraints nullable="false" />
             </column>
         </createTable>
         <createTable tableName="directus_roles">
             <column name="id" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_roles_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_roles_pkey"
+        />
             </column>
             <column name="name" type="VARCHAR(100)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column defaultValue="supervised_user_circle" name="icon" type="VARCHAR(30)">
-                <constraints nullable="false"/>
+            <column
+        defaultValue="supervised_user_circle"
+        name="icon"
+        type="VARCHAR(30)"
+      >
+                <constraints nullable="false" />
             </column>
-            <column name="description" type="TEXT"/>
-            <column name="ip_access" type="TEXT"/>
-            <column defaultValueBoolean="false" name="enforce_tfa" type="BOOLEAN">
-                <constraints nullable="false"/>
+            <column name="description" type="TEXT" />
+            <column name="ip_access" type="TEXT" />
+            <column
+        defaultValueBoolean="false"
+        name="enforce_tfa"
+        type="BOOLEAN"
+      >
+                <constraints nullable="false" />
             </column>
-            <column defaultValueBoolean="false" name="admin_access" type="BOOLEAN">
-                <constraints nullable="false"/>
+            <column
+        defaultValueBoolean="false"
+        name="admin_access"
+        type="BOOLEAN"
+      >
+                <constraints nullable="false" />
             </column>
             <column defaultValueBoolean="true" name="app_access" type="BOOLEAN">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
         </createTable>
         <createTable tableName="directus_settings">
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_settings_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_settings_pkey"
+        />
             </column>
-            <column defaultValue="Directus" name="project_name" type="VARCHAR(100)">
-                <constraints nullable="false"/>
+            <column
+        defaultValue="Directus"
+        name="project_name"
+        type="VARCHAR(100)"
+      >
+                <constraints nullable="false" />
             </column>
-            <column name="project_url" type="VARCHAR(255)"/>
-            <column defaultValue="#6644FF" name="project_color" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+            <column name="project_url" type="VARCHAR(255)" />
+            <column
+        defaultValue="#6644FF"
+        name="project_color"
+        type="VARCHAR(255)"
+      >
+                <constraints nullable="false" />
             </column>
-            <column name="project_logo" type="UUID"/>
-            <column name="public_foreground" type="UUID"/>
-            <column name="public_background" type="UUID"/>
-            <column name="public_note" type="TEXT"/>
-            <column defaultValueNumeric="25" name="auth_login_attempts" type="INTEGER"/>
-            <column name="auth_password_policy" type="VARCHAR(100)"/>
-            <column defaultValue="all" name="storage_asset_transform" type="VARCHAR(7)"/>
-            <column name="storage_asset_presets" type="JSON"/>
-            <column name="custom_css" type="TEXT"/>
-            <column name="storage_default_folder" type="UUID"/>
-            <column name="basemaps" type="JSON"/>
-            <column name="mapbox_key" type="VARCHAR(255)"/>
-            <column name="module_bar" type="JSON"/>
-            <column name="project_descriptor" type="VARCHAR(100)"/>
-            <column defaultValue="en-US" name="default_language" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+            <column name="project_logo" type="UUID" />
+            <column name="public_foreground" type="UUID" />
+            <column name="public_background" type="UUID" />
+            <column name="public_note" type="TEXT" />
+            <column
+        defaultValueNumeric="25"
+        name="auth_login_attempts"
+        type="INTEGER"
+      />
+            <column name="auth_password_policy" type="VARCHAR(100)" />
+            <column
+        defaultValue="all"
+        name="storage_asset_transform"
+        type="VARCHAR(7)"
+      />
+            <column name="storage_asset_presets" type="JSON" />
+            <column name="custom_css" type="TEXT" />
+            <column name="storage_default_folder" type="UUID" />
+            <column name="basemaps" type="JSON" />
+            <column name="mapbox_key" type="VARCHAR(255)" />
+            <column name="module_bar" type="JSON" />
+            <column name="project_descriptor" type="VARCHAR(100)" />
+            <column
+        defaultValue="en-US"
+        name="default_language"
+        type="VARCHAR(255)"
+      >
+                <constraints nullable="false" />
             </column>
-            <column name="custom_aspect_ratios" type="JSON"/>
-            <column name="public_favicon" type="UUID"/>
-            <column defaultValue="auto" name="default_appearance" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+            <column name="custom_aspect_ratios" type="JSON" />
+            <column name="public_favicon" type="UUID" />
+            <column
+        defaultValue="auto"
+        name="default_appearance"
+        type="VARCHAR(255)"
+      >
+                <constraints nullable="false" />
             </column>
-            <column name="default_theme_light" type="VARCHAR(255)"/>
-            <column name="theme_light_overrides" type="JSON"/>
-            <column name="default_theme_dark" type="VARCHAR(255)"/>
-            <column name="theme_dark_overrides" type="JSON"/>
-            <column name="report_error_url" type="VARCHAR(255)"/>
-            <column name="report_bug_url" type="VARCHAR(255)"/>
-            <column name="report_feature_url" type="VARCHAR(255)"/>
-            <column defaultValueBoolean="false" name="public_registration" type="BOOLEAN">
-                <constraints nullable="false"/>
+            <column name="default_theme_light" type="VARCHAR(255)" />
+            <column name="theme_light_overrides" type="JSON" />
+            <column name="default_theme_dark" type="VARCHAR(255)" />
+            <column name="theme_dark_overrides" type="JSON" />
+            <column name="report_error_url" type="VARCHAR(255)" />
+            <column name="report_bug_url" type="VARCHAR(255)" />
+            <column name="report_feature_url" type="VARCHAR(255)" />
+            <column
+        defaultValueBoolean="false"
+        name="public_registration"
+        type="BOOLEAN"
+      >
+                <constraints nullable="false" />
             </column>
-            <column defaultValueBoolean="true" name="public_registration_verify_email" type="BOOLEAN">
-                <constraints nullable="false"/>
+            <column
+        defaultValueBoolean="true"
+        name="public_registration_verify_email"
+        type="BOOLEAN"
+      >
+                <constraints nullable="false" />
             </column>
-            <column name="public_registration_role" type="UUID"/>
-            <column name="public_registration_email_filter" type="JSON"/>
+            <column name="public_registration_role" type="UUID" />
+            <column name="public_registration_email_filter" type="JSON" />
         </createTable>
         <createTable tableName="directus_shares">
             <column name="id" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_shares_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_shares_pkey"
+        />
             </column>
-            <column name="name" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)" />
             <column name="collection" type="VARCHAR(64)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="item" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="role" type="UUID"/>
-            <column name="password" type="VARCHAR(255)"/>
-            <column name="user_created" type="UUID"/>
-            <column defaultValueComputed="now()" name="date_created" type="TIMESTAMP WITH TIME ZONE"/>
-            <column name="date_start" type="TIMESTAMP WITH TIME ZONE"/>
-            <column name="date_end" type="TIMESTAMP WITH TIME ZONE"/>
-            <column defaultValueNumeric="0" name="times_used" type="INTEGER"/>
-            <column name="max_uses" type="INTEGER"/>
+            <column name="role" type="UUID" />
+            <column name="password" type="VARCHAR(255)" />
+            <column name="user_created" type="UUID" />
+            <column
+        defaultValueComputed="now()"
+        name="date_created"
+        type="TIMESTAMP WITH TIME ZONE"
+      />
+            <column name="date_start" type="TIMESTAMP WITH TIME ZONE" />
+            <column name="date_end" type="TIMESTAMP WITH TIME ZONE" />
+            <column defaultValueNumeric="0" name="times_used" type="INTEGER" />
+            <column name="max_uses" type="INTEGER" />
         </createTable>
         <createTable tableName="directus_users">
             <column name="id" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_users_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_users_pkey"
+        />
             </column>
-            <column name="first_name" type="VARCHAR(50)"/>
-            <column name="last_name" type="VARCHAR(50)"/>
-            <column name="email" type="VARCHAR(128)"/>
-            <column name="password" type="VARCHAR(255)"/>
-            <column name="location" type="VARCHAR(255)"/>
-            <column name="title" type="VARCHAR(50)"/>
-            <column name="description" type="TEXT"/>
-            <column name="tags" type="JSON"/>
-            <column name="avatar" type="UUID"/>
-            <column defaultValue="NULL" name="language" type="VARCHAR(255)"/>
-            <column name="tfa_secret" type="VARCHAR(255)"/>
+            <column name="first_name" type="VARCHAR(50)" />
+            <column name="last_name" type="VARCHAR(50)" />
+            <column name="email" type="VARCHAR(128)" />
+            <column name="password" type="VARCHAR(255)" />
+            <column name="location" type="VARCHAR(255)" />
+            <column name="title" type="VARCHAR(50)" />
+            <column name="description" type="TEXT" />
+            <column name="tags" type="JSON" />
+            <column name="avatar" type="UUID" />
+            <column defaultValue="NULL" name="language" type="VARCHAR(255)" />
+            <column name="tfa_secret" type="VARCHAR(255)" />
             <column defaultValue="active" name="status" type="VARCHAR(16)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="role" type="UUID"/>
-            <column name="token" type="VARCHAR(255)"/>
-            <column name="last_access" type="TIMESTAMP WITH TIME ZONE"/>
-            <column name="last_page" type="VARCHAR(255)"/>
+            <column name="role" type="UUID" />
+            <column name="token" type="VARCHAR(255)" />
+            <column name="last_access" type="TIMESTAMP WITH TIME ZONE" />
+            <column name="last_page" type="VARCHAR(255)" />
             <column defaultValue="default" name="provider" type="VARCHAR(128)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="external_identifier" type="VARCHAR(255)"/>
-            <column name="auth_data" type="JSON"/>
-            <column defaultValueBoolean="true" name="email_notifications" type="BOOLEAN"/>
-            <column name="appearance" type="VARCHAR(255)"/>
-            <column name="theme_dark" type="VARCHAR(255)"/>
-            <column name="theme_light" type="VARCHAR(255)"/>
-            <column name="theme_light_overrides" type="JSON"/>
-            <column name="theme_dark_overrides" type="JSON"/>
-            <column defaultValueBoolean="true" name="credits_visible" type="BOOLEAN"/>
-            <column defaultValueNumeric="0" name="total_uploaded_day" type="FLOAT4">
-                <constraints nullable="false"/>
+            <column name="external_identifier" type="VARCHAR(255)" />
+            <column name="auth_data" type="JSON" />
+            <column
+        defaultValueBoolean="true"
+        name="email_notifications"
+        type="BOOLEAN"
+      />
+            <column name="appearance" type="VARCHAR(255)" />
+            <column name="theme_dark" type="VARCHAR(255)" />
+            <column name="theme_light" type="VARCHAR(255)" />
+            <column name="theme_light_overrides" type="JSON" />
+            <column name="theme_dark_overrides" type="JSON" />
+            <column
+        defaultValueBoolean="true"
+        name="credits_visible"
+        type="BOOLEAN"
+      />
+            <column
+        defaultValueNumeric="0"
+        name="total_uploaded_day"
+        type="FLOAT4"
+      >
+                <constraints nullable="false" />
             </column>
         </createTable>
         <createTable tableName="directus_versions">
             <column name="id" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_versions_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_versions_pkey"
+        />
             </column>
             <column name="key" type="VARCHAR(64)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="name" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)" />
             <column name="collection" type="VARCHAR(64)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="item" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="hash" type="VARCHAR(255)"/>
-            <column defaultValueComputed="now()" name="date_created" type="TIMESTAMP WITH TIME ZONE"/>
-            <column defaultValueComputed="now()" name="date_updated" type="TIMESTAMP WITH TIME ZONE"/>
-            <column name="user_created" type="UUID"/>
-            <column name="user_updated" type="UUID"/>
+            <column name="hash" type="VARCHAR(255)" />
+            <column
+        defaultValueComputed="now()"
+        name="date_created"
+        type="TIMESTAMP WITH TIME ZONE"
+      />
+            <column
+        defaultValueComputed="now()"
+        name="date_updated"
+        type="TIMESTAMP WITH TIME ZONE"
+      />
+            <column name="user_created" type="UUID" />
+            <column name="user_updated" type="UUID" />
         </createTable>
         <createTable tableName="directus_webhooks">
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_webhooks_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_webhooks_pkey"
+        />
             </column>
             <column name="name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column defaultValue="POST" name="method" type="VARCHAR(10)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="url" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column defaultValue="active" name="status" type="VARCHAR(10)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column defaultValueBoolean="true" name="data" type="BOOLEAN">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="actions" type="VARCHAR(100)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="collections" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="headers" type="JSON"/>
-            <column defaultValueBoolean="false" name="was_active_before_deprecation" type="BOOLEAN">
-                <constraints nullable="false"/>
+            <column name="headers" type="JSON" />
+            <column
+        defaultValueBoolean="false"
+        name="was_active_before_deprecation"
+        type="BOOLEAN"
+      >
+                <constraints nullable="false" />
             </column>
-            <column name="migrated_flow" type="UUID"/>
+            <column name="migrated_flow" type="UUID" />
         </createTable>
         <createTable tableName="exam_data">
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="exam_data_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="exam_data_pkey"
+        />
             </column>
-            <column defaultValueBoolean="false" name="solved" type="BOOLEAN"/>
-            <column defaultValue="NULL" name="type" type="VARCHAR(255)"/>
+            <column defaultValueBoolean="false" name="solved" type="BOOLEAN" />
+            <column defaultValue="NULL" name="type" type="VARCHAR(255)" />
         </createTable>
         <createTable tableName="note_data">
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="note_data_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="note_data_pkey"
+        />
             </column>
-            <column defaultValue="NULL" name="title" type="VARCHAR(255)"/>
-            <column defaultValue="NULL" name="type" type="VARCHAR(255)"/>
-            <column name="original_author" type="VARCHAR(40)"/>
+            <column defaultValue="NULL" name="title" type="VARCHAR(255)" />
+            <column defaultValue="NULL" name="type" type="VARCHAR(255)" />
+            <column name="original_author" type="VARCHAR(40)" />
         </createTable>
         <createTable tableName="resource">
             <column name="course" type="INTEGER">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="date_created" type="TIMESTAMP WITH TIME ZONE"/>
-            <column name="date_updated" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="date_created" type="TIMESTAMP WITH TIME ZONE" />
+            <column name="date_updated" type="TIMESTAMP WITH TIME ZONE" />
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="resource_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="resource_pkey"
+        />
             </column>
-            <column name="note_data" type="INTEGER"/>
-            <column defaultValue="NULL" name="semester" type="VARCHAR(255)"/>
-            <column defaultValue="unverified" name="status" type="VARCHAR(255)"/>
+            <column name="note_data" type="INTEGER" />
+            <column defaultValue="NULL" name="semester" type="VARCHAR(255)" />
+            <column
+        defaultValue="unverified"
+        name="status"
+        type="VARCHAR(255)"
+      />
             <column defaultValue="NULL" name="type" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="user_created" type="UUID"/>
-            <column name="user_updated" type="UUID"/>
+            <column name="user_created" type="UUID" />
+            <column name="user_updated" type="UUID" />
             <column name="year" type="INTEGER">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="exam_data" type="INTEGER"/>
+            <column name="exam_data" type="INTEGER" />
         </createTable>
-        <addUniqueConstraint columnNames="operation" constraintName="directus_flows_operation_unique"
-                             tableName="directus_flows"/>
-        <addUniqueConstraint columnNames="reject" constraintName="directus_operations_reject_unique"
-                             tableName="directus_operations"/>
-        <addUniqueConstraint columnNames="resolve" constraintName="directus_operations_resolve_unique"
-                             tableName="directus_operations"/>
-        <addUniqueConstraint columnNames="email" constraintName="directus_users_email_unique"
-                             tableName="directus_users"/>
-        <addUniqueConstraint columnNames="external_identifier"
-                             constraintName="directus_users_external_identifier_unique" tableName="directus_users"/>
-        <addUniqueConstraint columnNames="token" constraintName="directus_users_token_unique"
-                             tableName="directus_users"/>
-        <addUniqueConstraint columnNames="exam_data" constraintName="resource_exam_data_unique" tableName="resource"/>
-        <addUniqueConstraint columnNames="note_data" constraintName="resource_note_data_unique" tableName="resource"/>
+        <addUniqueConstraint
+      columnNames="operation"
+      constraintName="directus_flows_operation_unique"
+      tableName="directus_flows"
+    />
+        <addUniqueConstraint
+      columnNames="reject"
+      constraintName="directus_operations_reject_unique"
+      tableName="directus_operations"
+    />
+        <addUniqueConstraint
+      columnNames="resolve"
+      constraintName="directus_operations_resolve_unique"
+      tableName="directus_operations"
+    />
+        <addUniqueConstraint
+      columnNames="email"
+      constraintName="directus_users_email_unique"
+      tableName="directus_users"
+    />
+        <addUniqueConstraint
+      columnNames="external_identifier"
+      constraintName="directus_users_external_identifier_unique"
+      tableName="directus_users"
+    />
+        <addUniqueConstraint
+      columnNames="token"
+      constraintName="directus_users_token_unique"
+      tableName="directus_users"
+    />
+        <addUniqueConstraint
+      columnNames="exam_data"
+      constraintName="resource_exam_data_unique"
+      tableName="resource"
+    />
+        <addUniqueConstraint
+      columnNames="note_data"
+      constraintName="resource_note_data_unique"
+      tableName="resource"
+    />
         <createTable tableName="about_page">
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="about_page_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="about_page_pkey"
+        />
             </column>
-            <column name="page_en" type="TEXT"/>
-            <column name="page_ar" type="TEXT"/>
+            <column name="page_en" type="TEXT" />
+            <column name="page_ar" type="TEXT" />
         </createTable>
         <createTable tableName="category">
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="category_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="category_pkey"
+        />
             </column>
-            <column name="sort" type="INTEGER"/>
-            <column name="name_ar" type="VARCHAR(255)"/>
-            <column name="name_en" type="VARCHAR(255)"/>
-            <column name="color" type="VARCHAR(255)"/>
-            <column name="slug" type="VARCHAR(255)"/>
+            <column name="sort" type="INTEGER" />
+            <column name="name_ar" type="VARCHAR(255)" />
+            <column name="name_en" type="VARCHAR(255)" />
+            <column name="color" type="VARCHAR(255)" />
+            <column name="slug" type="VARCHAR(255)" />
         </createTable>
         <createTable tableName="course_category">
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="course_category_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="course_category_pkey"
+        />
             </column>
-            <column name="course_id" type="INTEGER"/>
-            <column name="category_id" type="INTEGER"/>
+            <column name="course_id" type="INTEGER" />
+            <column name="category_id" type="INTEGER" />
         </createTable>
         <createTable tableName="directus_folders">
             <column name="id" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_folders_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_folders_pkey"
+        />
             </column>
             <column name="name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="parent" type="UUID"/>
+            <column name="parent" type="UUID" />
         </createTable>
         <createTable tableName="directus_permissions">
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_permissions_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_permissions_pkey"
+        />
             </column>
-            <column name="role" type="UUID"/>
+            <column name="role" type="UUID" />
             <column name="collection" type="VARCHAR(64)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="action" type="VARCHAR(10)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="permissions" type="JSON"/>
-            <column name="validation" type="JSON"/>
-            <column name="presets" type="JSON"/>
-            <column name="fields" type="TEXT"/>
+            <column name="permissions" type="JSON" />
+            <column name="validation" type="JSON" />
+            <column name="presets" type="JSON" />
+            <column name="fields" type="TEXT" />
         </createTable>
         <createTable tableName="directus_revisions">
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_revisions_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_revisions_pkey"
+        />
             </column>
             <column name="activity" type="INTEGER">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="collection" type="VARCHAR(64)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="item" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="data" type="JSON"/>
-            <column name="delta" type="JSON"/>
-            <column name="parent" type="INTEGER"/>
-            <column name="version" type="UUID"/>
+            <column name="data" type="JSON" />
+            <column name="delta" type="JSON" />
+            <column name="parent" type="INTEGER" />
+            <column name="version" type="UUID" />
         </createTable>
         <createTable tableName="directus_sessions">
             <column name="token" type="VARCHAR(64)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_sessions_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_sessions_pkey"
+        />
             </column>
-            <column name="user" type="UUID"/>
+            <column name="user" type="UUID" />
             <column name="expires" type="TIMESTAMP WITH TIME ZONE">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
-            <column name="ip" type="VARCHAR(255)"/>
-            <column name="user_agent" type="TEXT"/>
-            <column name="share" type="UUID"/>
-            <column name="origin" type="VARCHAR(255)"/>
-            <column name="next_token" type="VARCHAR(64)"/>
+            <column name="ip" type="VARCHAR(255)" />
+            <column name="user_agent" type="TEXT" />
+            <column name="share" type="UUID" />
+            <column name="origin" type="VARCHAR(255)" />
+            <column name="next_token" type="VARCHAR(64)" />
         </createTable>
         <createTable tableName="directus_translations">
             <column name="id" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="directus_translations_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="directus_translations_pkey"
+        />
             </column>
             <column name="language" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="key" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="value" type="TEXT">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
         </createTable>
         <createTable tableName="resource_files">
-            <column name="directus_files_id" type="UUID"/>
+            <column name="directus_files_id" type="UUID" />
             <column autoIncrement="true" name="id" type="INTEGER">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="resource_files_pkey"/>
+                <constraints
+          nullable="false"
+          primaryKey="true"
+          primaryKeyName="resource_files_pkey"
+        />
             </column>
-            <column name="resource_id" type="INTEGER"/>
-            <column name="sort" type="INTEGER"/>
+            <column name="resource_id" type="INTEGER" />
+            <column name="sort" type="INTEGER" />
         </createTable>
-        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="course_category"
-                                 constraintName="course_category_category_id_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="category" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="course_category"
-                                 constraintName="course_category_course_id_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="course" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="group" baseTableName="directus_collections"
-                                 constraintName="directus_collections_group_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="collection" referencedTableName="directus_collections"
-                                 validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="user_created" baseTableName="directus_dashboards"
-                                 constraintName="directus_dashboards_user_created_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="SET NULL" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="folder" baseTableName="directus_files"
-                                 constraintName="directus_files_folder_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="SET NULL" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_folders" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="modified_by" baseTableName="directus_files"
-                                 constraintName="directus_files_modified_by_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="uploaded_by" baseTableName="directus_files"
-                                 constraintName="directus_files_uploaded_by_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="user_created" baseTableName="directus_flows"
-                                 constraintName="directus_flows_user_created_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="SET NULL" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="parent" baseTableName="directus_folders"
-                                 constraintName="directus_folders_parent_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_folders" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="recipient" baseTableName="directus_notifications"
-                                 constraintName="directus_notifications_recipient_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="sender" baseTableName="directus_notifications"
-                                 constraintName="directus_notifications_sender_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="flow" baseTableName="directus_operations"
-                                 constraintName="directus_operations_flow_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_flows" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="reject" baseTableName="directus_operations"
-                                 constraintName="directus_operations_reject_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_operations" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="resolve" baseTableName="directus_operations"
-                                 constraintName="directus_operations_resolve_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_operations" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="user_created" baseTableName="directus_operations"
-                                 constraintName="directus_operations_user_created_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="SET NULL" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="dashboard" baseTableName="directus_panels"
-                                 constraintName="directus_panels_dashboard_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_dashboards" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="user_created" baseTableName="directus_panels"
-                                 constraintName="directus_panels_user_created_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="SET NULL" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="role" baseTableName="directus_permissions"
-                                 constraintName="directus_permissions_role_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_roles" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="role" baseTableName="directus_presets"
-                                 constraintName="directus_presets_role_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_roles" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="user" baseTableName="directus_presets"
-                                 constraintName="directus_presets_user_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="activity" baseTableName="directus_revisions"
-                                 constraintName="directus_revisions_activity_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_activity" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="parent" baseTableName="directus_revisions"
-                                 constraintName="directus_revisions_parent_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_revisions" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="version" baseTableName="directus_revisions"
-                                 constraintName="directus_revisions_version_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_versions" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="share" baseTableName="directus_sessions"
-                                 constraintName="directus_sessions_share_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_shares" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="user" baseTableName="directus_sessions"
-                                 constraintName="directus_sessions_user_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="project_logo" baseTableName="directus_settings"
-                                 constraintName="directus_settings_project_logo_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_files" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="public_background" baseTableName="directus_settings"
-                                 constraintName="directus_settings_public_background_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_files" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="public_favicon" baseTableName="directus_settings"
-                                 constraintName="directus_settings_public_favicon_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_files" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="public_foreground" baseTableName="directus_settings"
-                                 constraintName="directus_settings_public_foreground_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_files" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="public_registration_role" baseTableName="directus_settings"
-                                 constraintName="directus_settings_public_registration_role_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="SET NULL" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_roles" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="storage_default_folder" baseTableName="directus_settings"
-                                 constraintName="directus_settings_storage_default_folder_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="SET NULL" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_folders" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="collection" baseTableName="directus_shares"
-                                 constraintName="directus_shares_collection_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION"
-                                 referencedColumnNames="collection" referencedTableName="directus_collections"
-                                 validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="role" baseTableName="directus_shares"
-                                 constraintName="directus_shares_role_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_roles" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="user_created" baseTableName="directus_shares"
-                                 constraintName="directus_shares_user_created_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="SET NULL" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="role" baseTableName="directus_users"
-                                 constraintName="directus_users_role_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="SET NULL" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_roles" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="collection" baseTableName="directus_versions"
-                                 constraintName="directus_versions_collection_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION"
-                                 referencedColumnNames="collection" referencedTableName="directus_collections"
-                                 validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="user_created" baseTableName="directus_versions"
-                                 constraintName="directus_versions_user_created_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="SET NULL" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="user_updated" baseTableName="directus_versions"
-                                 constraintName="directus_versions_user_updated_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="migrated_flow" baseTableName="directus_webhooks"
-                                 constraintName="directus_webhooks_migrated_flow_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="SET NULL" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_flows" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="course" baseTableName="resource"
-                                 constraintName="resource_course_foreign" deferrable="false" initiallyDeferred="false"
-                                 onDelete="SET NULL" onUpdate="NO ACTION" referencedColumnNames="id"
-                                 referencedTableName="course" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="exam_data" baseTableName="resource"
-                                 constraintName="resource_exam_data_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="exam_data" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="directus_files_id" baseTableName="resource_files"
-                                 constraintName="resource_files_directus_files_id_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_files" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="resource_id" baseTableName="resource_files"
-                                 constraintName="resource_files_resource_id_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="resource" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="note_data" baseTableName="resource"
-                                 constraintName="resource_note_data_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="note_data" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="user_created" baseTableName="resource"
-                                 constraintName="resource_user_created_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="user_updated" baseTableName="resource"
-                                 constraintName="resource_user_updated_foreign" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="directus_users" validate="true"/>
-        <sqlFile path="data-after.sql" relativeToChangelogFile="true"/>
+        <addForeignKeyConstraint
+      baseColumnNames="category_id"
+      baseTableName="course_category"
+      constraintName="course_category_category_id_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="category"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="course_id"
+      baseTableName="course_category"
+      constraintName="course_category_course_id_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="CASCADE"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="course"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="group"
+      baseTableName="directus_collections"
+      constraintName="directus_collections_group_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="collection"
+      referencedTableName="directus_collections"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="user_created"
+      baseTableName="directus_dashboards"
+      constraintName="directus_dashboards_user_created_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="SET NULL"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_users"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="folder"
+      baseTableName="directus_files"
+      constraintName="directus_files_folder_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="SET NULL"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_folders"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="modified_by"
+      baseTableName="directus_files"
+      constraintName="directus_files_modified_by_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_users"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="uploaded_by"
+      baseTableName="directus_files"
+      constraintName="directus_files_uploaded_by_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_users"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="user_created"
+      baseTableName="directus_flows"
+      constraintName="directus_flows_user_created_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="SET NULL"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_users"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="parent"
+      baseTableName="directus_folders"
+      constraintName="directus_folders_parent_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_folders"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="recipient"
+      baseTableName="directus_notifications"
+      constraintName="directus_notifications_recipient_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="CASCADE"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_users"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="sender"
+      baseTableName="directus_notifications"
+      constraintName="directus_notifications_sender_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_users"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="flow"
+      baseTableName="directus_operations"
+      constraintName="directus_operations_flow_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="CASCADE"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_flows"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="reject"
+      baseTableName="directus_operations"
+      constraintName="directus_operations_reject_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_operations"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="resolve"
+      baseTableName="directus_operations"
+      constraintName="directus_operations_resolve_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_operations"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="user_created"
+      baseTableName="directus_operations"
+      constraintName="directus_operations_user_created_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="SET NULL"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_users"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="dashboard"
+      baseTableName="directus_panels"
+      constraintName="directus_panels_dashboard_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="CASCADE"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_dashboards"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="user_created"
+      baseTableName="directus_panels"
+      constraintName="directus_panels_user_created_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="SET NULL"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_users"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="role"
+      baseTableName="directus_permissions"
+      constraintName="directus_permissions_role_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="CASCADE"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_roles"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="role"
+      baseTableName="directus_presets"
+      constraintName="directus_presets_role_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="CASCADE"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_roles"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="user"
+      baseTableName="directus_presets"
+      constraintName="directus_presets_user_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="CASCADE"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_users"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="activity"
+      baseTableName="directus_revisions"
+      constraintName="directus_revisions_activity_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="CASCADE"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_activity"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="parent"
+      baseTableName="directus_revisions"
+      constraintName="directus_revisions_parent_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_revisions"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="version"
+      baseTableName="directus_revisions"
+      constraintName="directus_revisions_version_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="CASCADE"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_versions"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="share"
+      baseTableName="directus_sessions"
+      constraintName="directus_sessions_share_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="CASCADE"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_shares"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="user"
+      baseTableName="directus_sessions"
+      constraintName="directus_sessions_user_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="CASCADE"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_users"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="project_logo"
+      baseTableName="directus_settings"
+      constraintName="directus_settings_project_logo_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_files"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="public_background"
+      baseTableName="directus_settings"
+      constraintName="directus_settings_public_background_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_files"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="public_favicon"
+      baseTableName="directus_settings"
+      constraintName="directus_settings_public_favicon_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_files"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="public_foreground"
+      baseTableName="directus_settings"
+      constraintName="directus_settings_public_foreground_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_files"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="public_registration_role"
+      baseTableName="directus_settings"
+      constraintName="directus_settings_public_registration_role_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="SET NULL"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_roles"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="storage_default_folder"
+      baseTableName="directus_settings"
+      constraintName="directus_settings_storage_default_folder_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="SET NULL"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_folders"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="collection"
+      baseTableName="directus_shares"
+      constraintName="directus_shares_collection_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="CASCADE"
+      onUpdate="NO ACTION"
+      referencedColumnNames="collection"
+      referencedTableName="directus_collections"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="role"
+      baseTableName="directus_shares"
+      constraintName="directus_shares_role_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="CASCADE"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_roles"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="user_created"
+      baseTableName="directus_shares"
+      constraintName="directus_shares_user_created_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="SET NULL"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_users"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="role"
+      baseTableName="directus_users"
+      constraintName="directus_users_role_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="SET NULL"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_roles"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="collection"
+      baseTableName="directus_versions"
+      constraintName="directus_versions_collection_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="CASCADE"
+      onUpdate="NO ACTION"
+      referencedColumnNames="collection"
+      referencedTableName="directus_collections"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="user_created"
+      baseTableName="directus_versions"
+      constraintName="directus_versions_user_created_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="SET NULL"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_users"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="user_updated"
+      baseTableName="directus_versions"
+      constraintName="directus_versions_user_updated_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_users"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="migrated_flow"
+      baseTableName="directus_webhooks"
+      constraintName="directus_webhooks_migrated_flow_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="SET NULL"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_flows"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="course"
+      baseTableName="resource"
+      constraintName="resource_course_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="SET NULL"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="course"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="exam_data"
+      baseTableName="resource"
+      constraintName="resource_exam_data_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="exam_data"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="directus_files_id"
+      baseTableName="resource_files"
+      constraintName="resource_files_directus_files_id_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_files"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="resource_id"
+      baseTableName="resource_files"
+      constraintName="resource_files_resource_id_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="CASCADE"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="resource"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="note_data"
+      baseTableName="resource"
+      constraintName="resource_note_data_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="note_data"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="user_created"
+      baseTableName="resource"
+      constraintName="resource_user_created_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_users"
+      validate="true"
+    />
+        <addForeignKeyConstraint
+      baseColumnNames="user_updated"
+      baseTableName="resource"
+      constraintName="resource_user_updated_foreign"
+      deferrable="false"
+      initiallyDeferred="false"
+      onDelete="NO ACTION"
+      onUpdate="NO ACTION"
+      referencedColumnNames="id"
+      referencedTableName="directus_users"
+      validate="true"
+    />
+      <sqlFile path="data-after.sql" relativeToChangelogFile="true" />
+
+      <rollback>
+                  <dropForeignKeyConstraint
+        baseTableName="course_category"
+        constraintName="course_category_category_id_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="course_category"
+        constraintName="course_category_course_id_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_collections"
+        constraintName="directus_collections_group_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_dashboards"
+        constraintName="directus_dashboards_user_created_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_files"
+        constraintName="directus_files_folder_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_files"
+        constraintName="directus_files_modified_by_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_files"
+        constraintName="directus_files_uploaded_by_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_flows"
+        constraintName="directus_flows_user_created_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_folders"
+        constraintName="directus_folders_parent_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_notifications"
+        constraintName="directus_notifications_recipient_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_notifications"
+        constraintName="directus_notifications_sender_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_operations"
+        constraintName="directus_operations_flow_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_operations"
+        constraintName="directus_operations_reject_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_operations"
+        constraintName="directus_operations_resolve_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_operations"
+        constraintName="directus_operations_user_created_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_panels"
+        constraintName="directus_panels_dashboard_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_panels"
+        constraintName="directus_panels_user_created_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_permissions"
+        constraintName="directus_permissions_role_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_presets"
+        constraintName="directus_presets_role_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_presets"
+        constraintName="directus_presets_user_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_revisions"
+        constraintName="directus_revisions_activity_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_revisions"
+        constraintName="directus_revisions_parent_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_revisions"
+        constraintName="directus_revisions_version_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_sessions"
+        constraintName="directus_sessions_share_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_sessions"
+        constraintName="directus_sessions_user_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_settings"
+        constraintName="directus_settings_project_logo_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_settings"
+        constraintName="directus_settings_public_background_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_settings"
+        constraintName="directus_settings_public_favicon_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_settings"
+        constraintName="directus_settings_public_foreground_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_settings"
+        constraintName="directus_settings_public_registration_role_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_settings"
+        constraintName="directus_settings_storage_default_folder_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_shares"
+        constraintName="directus_shares_collection_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_shares"
+        constraintName="directus_shares_role_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_shares"
+        constraintName="directus_shares_user_created_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_users"
+        constraintName="directus_users_role_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_versions"
+        constraintName="directus_versions_collection_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_versions"
+        constraintName="directus_versions_user_created_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_versions"
+        constraintName="directus_versions_user_updated_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="directus_webhooks"
+        constraintName="directus_webhooks_migrated_flow_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="resource"
+        constraintName="resource_course_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="resource"
+        constraintName="resource_exam_data_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="resource_files"
+        constraintName="resource_files_directus_files_id_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="resource_files"
+        constraintName="resource_files_resource_id_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="resource"
+        constraintName="resource_note_data_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="resource"
+        constraintName="resource_user_created_foreign"
+      />
+        <dropForeignKeyConstraint
+        baseTableName="resource"
+        constraintName="resource_user_updated_foreign"
+      />
+        <dropUniqueConstraint
+        constraintName="directus_flows_operation_unique"
+        tableName="directus_flows"
+      />
+        <dropUniqueConstraint
+        constraintName="directus_operations_reject_unique"
+        tableName="directus_operations"
+      />
+        <dropUniqueConstraint
+        constraintName="directus_operations_resolve_unique"
+        tableName="directus_operations"
+      />
+        <dropUniqueConstraint
+        constraintName="directus_users_email_unique"
+        tableName="directus_users"
+      />
+        <dropUniqueConstraint
+        constraintName="directus_users_external_identifier_unique"
+        tableName="directus_users"
+      />
+        <dropUniqueConstraint
+        constraintName="directus_users_token_unique"
+        tableName="directus_users"
+      />
+        <dropUniqueConstraint
+        constraintName="resource_exam_data_unique"
+        tableName="resource"
+      />
+        <dropUniqueConstraint
+        constraintName="resource_note_data_unique"
+        tableName="resource"
+      />
+        <dropTable tableName="about_page" />
+        <dropTable tableName="announcement" />
+        <dropTable tableName="category" />
+        <dropTable tableName="course" />
+        <dropTable tableName="course_category" />
+        <dropTable tableName="directus_activity" />
+        <dropTable tableName="directus_collections" />
+        <dropTable tableName="directus_dashboards" />
+        <dropTable tableName="directus_extensions" />
+        <dropTable tableName="directus_fields" />
+        <dropTable tableName="directus_files" />
+        <dropTable tableName="directus_flows" />
+        <dropTable tableName="directus_folders" />
+        <dropTable tableName="directus_migrations" />
+        <dropTable tableName="directus_notifications" />
+        <dropTable tableName="directus_operations" />
+        <dropTable tableName="directus_panels" />
+        <dropTable tableName="directus_permissions" />
+        <dropTable tableName="directus_presets" />
+        <dropTable tableName="directus_relations" />
+        <dropTable tableName="directus_revisions" />
+        <dropTable tableName="directus_roles" />
+        <dropTable tableName="directus_sessions" />
+        <dropTable tableName="directus_settings" />
+        <dropTable tableName="directus_shares" />
+        <dropTable tableName="directus_translations" />
+        <dropTable tableName="directus_users" />
+        <dropTable tableName="directus_versions" />
+        <dropTable tableName="directus_webhooks" />
+        <dropTable tableName="exam_data" />
+        <dropTable tableName="note_data" />
+        <dropTable tableName="resource" />
+        <dropTable tableName="resource_files" />
+      </rollback>
     </changeSet>
     <changeSet id="7-1" author="HDDTHR">
-        <tagDatabase tag="7"/>
+      <tagDatabase tag="7" />
     </changeSet>
 </databaseChangeLog>

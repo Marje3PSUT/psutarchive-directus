@@ -9,59 +9,67 @@
 // else deal with that)
 //
 
-import { defineHook } from '@directus/extensions-sdk';
-import _ from 'lodash';
+import { defineHook } from "@directus/extensions-sdk";
+import _ from "lodash";
+import {
+  createResourceConflictError,
+  createResourceManipulationError,
+} from "./errors";
+import conflictQuery from "./query";
 
-import { createResourceConflictError, createResourceManipulationError } from './errors';
-import conflictQuery from './query';
+interface Resource {
+  status: string;
+  type: string;
+}
 
 export default defineHook(({ filter }, { services, database, getSchema }) => {
-	const { ItemsService } = services;
+  const { ItemsService } = services;
 
-	// Handle updating resources
-	// 1. If batch updating, ensure only status is being updated
-	// 2. If updating single resource, then find resultant resource by combining the payload with the current resource and check for conflicts
-	filter('resource.items.update', async (payload: any, meta) => {
-		if (meta.keys.length > 1) {
-			const fields = Object.keys(payload);
-			if (fields.length != 1 || fields[0] != 'status')
-				throw new (createResourceManipulationError(
-					"You aren't allowed to batch update resources, unless you only intend to modify the status field!"
-				))();
-			return;
-		}
+  // Handle updating resources
+  // 1. If batch updating, ensure only status is being updated
+  // 2. If updating single resource, then find resultant resource by combining the payload with the current resource and check for conflicts
+  filter("resource.items.update", async (payload: Resource, meta) => {
+    if (meta.keys.length > 1) {
+      const fields = Object.keys(payload);
+      if (fields.length != 1 || fields[0] != "status")
+        throw new (createResourceManipulationError(
+          "You aren't allowed to batch update resources, unless you only intend to modify the status field!"
+        ))();
+      return payload;
+    }
+    const schema = await getSchema();
+    const resourceItemService = new ItemsService("resource", {
+      database: database,
+      schema: schema,
+    });
+    const oldResource = await resourceItemService.readOne(meta.keys[0], {
+      fields: ["course", "semester", "year", "type", "exam_data.type"],
+    });
+    const mergedResource = _.merge(oldResource, payload);
+    if (mergedResource.type != "exam") return payload;
+    const conflictingResources = await resourceItemService.readByQuery(
+      _.merge(conflictQuery(mergedResource), {
+        filter: { id: { _neq: meta.keys[0] } },
+      })
+    );
+    if (conflictingResources.length > 0)
+      throw new (createResourceConflictError(conflictingResources))();
+    return payload;
+  });
 
-		const schema = await getSchema();
-		const resourceItemService = new ItemsService('resource', { database: database, schema: schema });
-
-		const oldResource = await resourceItemService.readOne(meta.keys[0], {
-			fields: ['course', 'semester', 'year', 'type', 'exam_data.type'],
-		});
-
-		const mergedResource = _.merge(oldResource, payload);
-
-		if (mergedResource.type != 'exam') return;
-
-		//console.dir(_.merge(conflictQuery(mergedResource), { filter: { id: { _neq: meta.keys[0] } } }), { depth: null });
-
-		const conflictingResources = await resourceItemService.readByQuery(
-			_.merge(conflictQuery(mergedResource), { filter: { id: { _neq: meta.keys[0] } } })
-		);
-
-		if (conflictingResources.length > 0) throw new (createResourceConflictError(conflictingResources))();
-	});
-
-	// Handle creating resource
-	filter('resource.items.create', async (payload: any) => {
-		const schema = await getSchema();
-		const resourceItemService = new ItemsService('resource', { database: database, schema: schema });
-
-		if (payload.type != 'exam') return;
-
-		//console.dir(conflictQuery(payload), { depth: null });
-
-		const conflictingResources = await resourceItemService.readByQuery(conflictQuery(payload));
-
-		if (conflictingResources.length > 0) throw new (createResourceConflictError(conflictingResources))();
-	});
+  // Handle creating resource
+  filter("resource.items.create", async (payload: Resource) => {
+    const schema = await getSchema();
+    const resourceItemService = new ItemsService("resource", {
+      database: database,
+      schema: schema,
+    });
+    if (payload.type != "exam") return payload;
+    const conflictingResources = await resourceItemService.readByQuery(
+      conflictQuery(payload)
+    );
+    if (conflictingResources.length > 0)
+      throw new (createResourceConflictError(conflictingResources))();
+    return payload;
+  });
 });

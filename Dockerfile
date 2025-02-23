@@ -8,7 +8,6 @@ FROM base AS builder
 
 WORKDIR /app
 COPY extensions/package.json .
-COPY extensions/patches patches/
 RUN pnpm install
 COPY extensions/ /app
 RUN pnpm run build
@@ -21,6 +20,7 @@ USER node
 WORKDIR /directus
 COPY --from=builder /app/ extensions/psutarchive-essentials/
 COPY translations/ ./translations
+COPY startup-files/assets ./assets
 
 ENTRYPOINT ["/sbin/tini", "--" ]
 CMD ["sh", "-c", "node cli.js bootstrap && exec node cli.js start"]
