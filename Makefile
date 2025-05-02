@@ -49,8 +49,8 @@ temp-db: # Create a non-persistent db for testing purposes.
 	bash -c 'source dev-scripts/config.sh && \
 		docker run --rm --name "$$CONTAINER_NAME" \
 		  -e POSTGRES_DB="$$DB_NAME" \
-		  -e POSTGRES_USER="$$DATABASE_USER" \
-		  -e POSTGRES_PASSWORD="$$DATABASE_PASSWORD" \
+		  -e POSTGRES_USER="$$DB_USER" \
+		  -e POSTGRES_PASSWORD="$$DB_PASSWORD" \
 		  --network host \
 		  --tmpfs /var/lib/postgresql/data:rw \
 		  postgres:17.2-alpine'
@@ -61,8 +61,8 @@ persistent-db: # Create a persistent db for testing purposes.
 		docker volume inspect $$VOLUME_NAME >/dev/null 2>&1 || docker volume create $$VOLUME_NAME && \
 		docker run --rm --name "$$CONTAINER_NAME" \
 		  -e POSTGRES_DB="$$DB_NAME" \
-		  -e POSTGRES_USER="$$DATABASE_USER" \
-		  -e POSTGRES_PASSWORD="$$DATABASE_PASSWORD" \
+		  -e POSTGRES_USER="$$DB_USER" \
+		  -e POSTGRES_PASSWORD="$$DB_PASSWORD" \
 		  --network host \
 		  -v $$VOLUME_NAME:/var/lib/postgresql/data \
 		  postgres:17.2-alpine'

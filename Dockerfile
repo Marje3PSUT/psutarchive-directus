@@ -8,7 +8,6 @@ FROM base AS builder
 
 WORKDIR /app
 COPY extensions/package.json .
-COPY extensions/patches patches/
 RUN pnpm install
 COPY extensions/ /app
 RUN pnpm run build
