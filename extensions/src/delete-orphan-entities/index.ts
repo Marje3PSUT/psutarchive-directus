@@ -6,38 +6,41 @@
 // This script runs everyday at 3AM.
 //
 
-import { defineHook } from '@directus/extensions-sdk';
+import { defineHook } from "@directus/extensions-sdk";
 
 interface KeyStringObject {
-	[key: string]: string;
+  [key: string]: string;
 }
 
-// Syntax:
-//     collection_name: field_to_be_checked
 const COLLECTIONS_TO_CLEAN: KeyStringObject = {
-	note_data: 'related_resource',
-	exam_data: 'related_resource',
-	resource_files: 'resource_id',
-	course_category: 'course_id',
+  note_data: "related_resource",
+  exam_data: "related_resource",
+  resource_files: "resource_id",
+  course_category: "course_id",
 };
 
-export default defineHook(({ schedule }, { getSchema, database, services, logger }) => {
-	const { ItemsService } = services;
+export default defineHook(
+  ({ schedule }, { getSchema, database, services, logger }) => {
+    const { ItemsService } = services;
 
-	schedule('0 3 * * *', async () => {
-		logger.info('Cleaning orhpan entities!');
+    schedule("0 3 * * *", async () => {
+      logger.info("Cleaning orphan entities!");
 
-		Object.keys(COLLECTIONS_TO_CLEAN).forEach(async (collectionName: string) => {
-			const colItemsService = new ItemsService(collectionName, { database: database, schema: await getSchema() });
+      for (const collectionName of Object.keys(COLLECTIONS_TO_CLEAN)) {
+        const colItemsService = new ItemsService(collectionName, {
+          database: database,
+          schema: await getSchema(),
+        });
 
-			colItemsService.deleteByQuery({
-				filter: {
-					[COLLECTIONS_TO_CLEAN[collectionName] as string]: {
-						_null: true,
-					},
-				},
-				limit: -1,
-			});
-		});
-	});
-});
+        colItemsService.deleteByQuery({
+          filter: {
+            [COLLECTIONS_TO_CLEAN[collectionName] as string]: {
+              _null: true,
+            },
+          },
+          limit: -1,
+        });
+      }
+    });
+  }
+);
