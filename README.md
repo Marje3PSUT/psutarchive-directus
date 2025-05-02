@@ -7,6 +7,7 @@ Directus backend for PSUTArchive. Frontend can be found [here](https://github.co
 - `build-essential`
 - Node.js, npm (LTS recommended)
 - Docker
+- Python3 
 
 ## Getting Started
 
