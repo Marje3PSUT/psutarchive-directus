@@ -20,7 +20,7 @@ RUN apk add tini
 USER node
 WORKDIR /directus
 COPY --from=builder /app/ extensions/psutarchive-essentials/
-COPY translations/ ./translations
+COPY startup-files/ ./essentials/
 
 ENTRYPOINT ["/sbin/tini", "--" ]
 CMD ["sh", "-c", "node cli.js bootstrap && exec node cli.js start"]

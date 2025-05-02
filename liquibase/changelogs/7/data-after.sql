@@ -32,6 +32,8 @@ INSERT INTO public.directus_settings (id, project_name, project_color, default_l
 VALUES (1, 'Directus', '#6644FF', 'en-US', 'auto');
 INSERT INTO public.directus_folders (id, "name", parent)
 VALUES ('24bd313a-6aba-4b24-a7f3-c67e4ccc0085'::uuid, 'resource_files', NULL);
+INSERT INTO public.directus_folders (id, "name", parent)
+VALUES ('165fe0d1-7576-4d7c-8aa0-3ebc2100f477'::uuid, 'assets_folder', NULL);
 --
 -- Data for Name: directus_collections; Type: TABLE DATA; Schema: public; Owner: directus
 --
