@@ -12,6 +12,7 @@ app: # Runs an instance of the backend (env in the config.sh)
 		--network host \
 		--env-file <(env) \
 		-v ./configs:/configs \
+		-v ./.tmp/uploads:/directus/uploads \
 		psutarchive-directus:latest'
 
 app-dev: # Runs an instance of the backend *with extension hot-reloads* (env in the config.sh)\n
@@ -21,6 +22,7 @@ app-dev: # Runs an instance of the backend *with extension hot-reloads* (env in 
 		--network host \
 		--env-file <(env) \
 		-v ./configs:/configs \
+		-v ./.tmp/uploads:/directus/uploads \
 		-v ./extensions:/directus/extensions/psutarchive-essentials \
 		psutarchive-directus:latest'
 
