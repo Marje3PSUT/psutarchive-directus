@@ -15,28 +15,29 @@
    make persistent-db      # or "temp-db" if desired
    
    # Separate terminal
-   ./dev-scripts/update-database.sh
+   ./dev-scripts/update-db.py
    make app                # or "app-dev" if developing extensions
    ```
 2. Set a starting point:
    ```bash
-   ./dev-scripts/set-starting-point.sh
+   ./dev-scripts/set-starting-point.py
    ```
 3. Make your database changes via Directus Admin UI. Make changes as admin by running `make admin` and logging in using the values in the config.sh.
 4. Generate a changeset for issue #XYZ:
    ```bash
-   ./dev-scripts/generate-changelog.sh XYZ
+   ./dev-scripts/generate-changelog.py XYZ
    ```
 5. Manually review generated files in `.tmp/` and move to `liquibase/changelogs/XYZ/`
+6. Changelog will be generated in the `liquibase/changelogs/XYZ` directory (and db dumps if changed).
 6. Test your changeset with a workflow similar to this:
    ```bash
    # After shutting down db and directus
    make clean
    make temp-db
-   ./dev-scripts/update-database.sh
+   ./dev-scripts/update-db.py
    # Manually test if upgrade was successful, and make necessary changes.
    # Test rolling back to previous issue
-   ./dev-scripts/rollback-database.sh <THE_ISSUE_NUMBER_BEFORE_YOURS>
+   ./dev-scripts/rollback-db.py <THE_ISSUE_NUMBER_BEFORE_YOURS>
    ```
 
 ---
@@ -54,7 +55,7 @@
 ```
 # Done once
 make persistent-db
-./dev-scripts/update-database.sh
+./dev-scripts/update-db.py
 make app-dev
 
 cd extensions
@@ -64,7 +65,7 @@ npm run dev
 ---
 
 ## 3. Managing Translations
-- Edit JSON files in `translations/` directory and rebuild `psutarchive-directus` docker image
+- Edit JSON files in `configs/translations/` directory and rebuild `psutarchive-directus` docker image
 - Make sure that all languages have the same keys.
 
 ---
@@ -77,7 +78,7 @@ We want to add a new role called "Reviewer" to the Directus instance. This invol
 1. **Set Starting Point**  
    Before making any changes, set a starting point for the database after deploying and updating it:
    ```bash
-   ./dev-scripts/set-starting-point.sh
+   ./dev-scripts/set-starting-point.py
    ```
 
 2. **Create the Role in Directus**  
@@ -90,35 +91,27 @@ We want to add a new role called "Reviewer" to the Directus instance. This invol
 3. **Generate Changeset**  
    After creating the role, generate a changeset for issue #15 (example issue number):
    ```bash
-   ./dev-scripts/generate-changelog.sh 15
+   ./dev-scripts/generate-changelog.py 15
    ```
 
 4. **Review Generated Files**  
-   The script generates files in `.tmp/15/`. Review the files:
+   The script generates files in `liquibase/changelogs/15/`. Review the files:
     - `.tmp/data-before.sql`: Contains the SQL dump before the changes (for rollbacks).
    - `.tmp/data-after.sql`: Contains the SQL dump after the changes.
    - `.tmp/final-changelog.xml`: Contains the Liquibase changeset.
 
-5. **Move Changeset to Liquibase Directory**  
-   Move the  changeset to the `liquibase/changelogs/15/` directory:
-   ```bash
-   mkdir -p liquibase/15
-   mv .tmp/final-changelog.xml liquibase/15/
-   mv .tmp/data-after.sql liquibase/15/
-   mv .tmp/data-before.sql liquibase/15/
-   ```
 
-6. **Update Master Changelog**  
+5. **Update Master Changelog**  
    Add the new changeset to `liquibase/changelogs/changelog-master.xml`:
    ```xml
    <include file="15/final-changelog.xml" relativeToChangelogFile="true"/>
    ```
 
-7. **Test the Changeset**  
+6. **Test the Changeset**  
    Apply the changeset to a fresh database:
    ```bash
    make temp-db
-   ./dev-scripts/update-database.sh
+   ./dev-scripts/update-db.py
    make app
    ```
    Verify that the "Reviewer" role exists in the Directus Admin UI.
@@ -132,7 +125,7 @@ We want to upgrade Directus from version `10.7.2` to `10.8.0`. This involves tes
 1. **Set Starting Point**  
    Before upgrading, set a starting point for the current database after deploying and updating:
    ```bash
-   ./dev-scripts/set-starting-point.sh
+   ./dev-scripts/set-starting-point.py
    ```
 
 2. **Update Dockerfile**  
@@ -149,36 +142,28 @@ We want to upgrade Directus from version `10.7.2` to `10.8.0`. This involves tes
 
 4. **Test Compatibility**  
    - Log in to the Directus Admin UI and verify that all existing roles, collections, and permissions are intact.
-   - Test custom extensions to ensure they work with the new version.
+   - Test custom extensions to ensure they work with the new version. If not, check the directus GitHub releases page for compatible versions of packages.
 
 5. **Generate Changeset**  
    If there are schema changes, generate a changeset for issue #20 (example issue number):
    ```bash
-   ./dev-scripts/generate-changelog.sh 20
+   ./dev-scripts/generate-changelog.py 20
    ```
 
 7. **Review Generated Files**  
-   Review the files in `.tmp/20/`, making sure to add to the generated changeset if needed.
+   Review the files in `liquibase/changelogs/20/`, making sure to modify the generated changeset if needed.
 
-8. **Move Changeset
-   Move the changeset to the `liquibase/changelogs/20/` directory:
-   ```bash
-   mkdir -p liquibase/20
-   mv .tmp/20/final-changelog.xml liquibase/changelogs/20/
-   mv .tmp/20/data-after.sql liquibase/changelogs/20/
-   ```
-
-9. **Update Master Changelog**  
+8. **Update Master Changelog**  
    Add the new changeset to `liquibase/changelogs/changelog-master.xml`:
    ```xml
    <include file="20/final-changelog.xml" relativeToChangelogFile="true"/>
    ```
 
-10. **Test the Upgrade**  
+9. **Test the Upgrade**  
     Apply the changeset to a fresh database:
     ```bash
     make temp-db
-    ./dev/scripts/update-database.sh
+    ./dev/scripts/update-db.py
     make app
     ```
     Verify that the upgrade works as expected.
