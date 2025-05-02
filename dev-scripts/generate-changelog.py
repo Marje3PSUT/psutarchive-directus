@@ -57,10 +57,10 @@ def generate_changelog():
   down_contents = _extract_changelog_body(constants.DOWN_CHANGELOG_PATH)
   _generate_from_template(author, down_contents, issue_number, up_contents,
                           (True if before_dump_file else False))
-  _move_to_changelogs(issue_number)
+  _copy_to_changelogs(issue_number)
 
 
-def _move_to_changelogs(issue_number):
+def _copy_to_changelogs(issue_number):
   target_dir = constants.CHANGELOG_DIR / issue_number
   target_dir.mkdir(parents=True, exist_ok=True)
   for item in target_dir.iterdir():
@@ -69,7 +69,7 @@ def _move_to_changelogs(issue_number):
   for f in constants.TMP_DIR.iterdir():
     if f.name in [constants.DUMP_BEFORE, constants.DUMP_AFTER,
                   constants.FINAL_CHANGELOG]:
-      shutil.move(str(f), target_dir / f.name)
+      shutil.copy(str(f), target_dir / f.name)
 
 
 def _generate_from_template(author, down_contents, issue_number, up_contents,
@@ -83,11 +83,10 @@ def _generate_from_template(author, down_contents, issue_number, up_contents,
                             https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.31.xsd">
 
         <changeSet id="{issue_number}" author="{author}">
-          {up_contents}
-          
+          {up_contents if up_contents else ""}
           {f'<sqlFile path="{constants.DUMP_AFTER}" relativeToChangelogFile="true"/>' if dump_present else ""}
           <rollback>
-              {down_contents}
+            {down_contents if down_contents else ""}
             {f'<sqlFile path="{constants.DUMP_BEFORE}" relativeToChangelogFile="true"/>' if dump_present else ""}
           </rollback>
         </changeSet>
@@ -102,7 +101,6 @@ def _remove_old_changesets():
   for f in constants.TMP_DIR.iterdir():
     if f.is_file() and "before" not in f.name and f.name != ".gitignore":
       f.unlink()
-
 
 def _get_old_snapshot_file():
   return next((f for f in constants.TMP_DIR.iterdir() if "snapshot" in f.name),
@@ -126,6 +124,8 @@ def _get_author_name():
 
 
 def _extract_changelog_body(path):
+  if not path.exists():
+    return None
   lines = path.read_text().splitlines()
   trimmed = lines[2:-1]
   return "\n".join(line for line in trimmed if "changeSet" not in line)
